@@ -1,0 +1,26 @@
+{
+  "blockName": "accordion",
+  "variantName": "accordion",
+  "baseBlock": "accordion",
+  "description": "BNY-styled accordion with expandable/collapsible panels, navy text on white background, Roboto typography, gray borders",
+  "characteristics": {
+    "colorScheme": "light",
+    "density": "comfortable",
+    "purpose": "accordion",
+    "imagePattern": "noimg",
+    "contentPattern": {
+      "structure": "label-content-pairs",
+      "buttonCount": 0,
+      "imageCount": 0
+    }
+  },
+  "source": "figma",
+  "figmaNodeId": "2081:3761",
+  "figmaFileKey": "bRVrW08G2QHwRAz3TUMkgH",
+  "usage": {
+    "pagesUsing": ["accordion-demo"],
+    "reuseCount": 1,
+    "lastUsed": "2026-04-02",
+    "createdDate": "2026-04-02"
+  }
+}

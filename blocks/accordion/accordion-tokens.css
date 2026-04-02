@@ -1,0 +1,23 @@
+/* Accordion component tokens — references site-wide design system.
+   Only block-specific overrides that differ from global styles. */
+
+.accordion {
+  /* layout */
+  --accordion-max-width: 1024px;
+
+  /* header spacing */
+  --accordion-header-padding-x: var(--container-padding-sm);
+  --accordion-header-padding-y: var(--spacing-16);
+  --accordion-header-gap: var(--spacing-16);
+  --accordion-header-hover-bg: var(--gray-025);
+
+  /* body spacing */
+  --accordion-body-padding-x: var(--container-padding-sm);
+  --accordion-body-padding-bottom: 32px;
+
+  /* icon */
+  --accordion-icon-size: 24px;
+
+  /* transitions */
+  --accordion-transition: 200ms ease;
+}
