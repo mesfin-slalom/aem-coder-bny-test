@@ -7,7 +7,7 @@
 }
 
 .accordion details {
-  border: 1px solid var(--border-color);
+  border: var(--sizing-006-1px) solid var(--stroke-neutral-primary);
 }
 
 .accordion details + details {
@@ -22,9 +22,9 @@
   list-style: none;
   overflow: auto;
   transition: background-color var(--accordion-transition);
-  font-size: var(--body-font-size-s);
+  font-size: var(--type-body-sm-base);
   font-weight: 700;
-  color: var(--heading-color);
+  color: var(--fg-brand-main);
 }
 
 .accordion details summary:focus,
@@ -44,8 +44,8 @@
   transform: translateY(-50%) rotate(135deg);
   width: 8px;
   height: 8px;
-  border: var(--sizing-2) solid var(--heading-color);
-  border-width: var(--sizing-2) var(--sizing-2) 0 0;
+  border: var(--sizing-013-2px) solid var(--fg-brand-main);
+  border-width: var(--sizing-013-2px) var(--sizing-013-2px) 0 0;
   transition: transform var(--accordion-transition);
 }
 
@@ -55,11 +55,11 @@
 
 .accordion details .accordion-item-body {
   padding: 0 var(--accordion-body-padding-x) var(--accordion-body-padding-bottom);
-  font-size: var(--body-font-size-s);
+  font-size: var(--type-body-sm-base);
 }
 
 .accordion details[open] .accordion-item-body {
-  border-top: 1px solid var(--border-color);
+  border-top: var(--sizing-006-1px) solid var(--stroke-neutral-primary);
 }
 
 .accordion details ul {
