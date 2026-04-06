@@ -167,6 +167,7 @@ export default async function decorate(block) {
 
     if (hasButton) {
       hasButton.classList.add('primary');
+    }
 
     if (slideIndicators) {
       const indicator = document.createElement('li');
