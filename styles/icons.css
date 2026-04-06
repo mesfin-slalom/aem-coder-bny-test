@@ -1,4 +1,11 @@
 /* BNY Icon Styles — extends base .icon from styles.css */
+.icon {
+  display: inline-block;
+  width: var(--sizing-150-24px);
+  height: var(--sizing-150-24px);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 
 /* Icon sizing variants */
 .icon-size-sm {
@@ -6,20 +13,15 @@
   height: var(--sizing-100-16px-base);
 }
 
-.icon-size-md {
-  width: var(--sizing-150-24px);
-  height: var(--sizing-150-24px);
-}
-
 .icon-size-lg {
   width: var(--sizing-200-32px);
   height: var(--sizing-200-32px);
 }
 
-/* Icon color — inherits currentColor for stroke-based Tabler icons */
-.icon img,
-.icon svg {
-  color: inherit;
+/* Icon image height/width to 100% */
+.icon img {
+  height: 100%;
+  width: 100%;
 }
 
 /* Inline icon alignment */
@@ -45,12 +47,6 @@ span .icon {
   height: var(--sizing-150-24px);
 }
 
-/* Dark theme icon inversion */
-.dark-navy .icon img,
-.dark-teal .icon img {
-  filter: brightness(0) invert(1);
-}
-
 /* Carousel indicator icons */
 .icon-carousel-indicator-active,
 .icon-carousel-indicator-inactive,
@@ -58,4 +54,631 @@ span .icon {
 .icon-carousel-indicator-inactive-taper-small {
   width: var(--sizing-050-8px);
   height: var(--sizing-050-8px);
+}
+
+/* Brand color filter for SVG icons (example for a blue brand color #0c62fb) Use AI/Copilot to generate for other colors */
+.icon-brand-color {
+  filter: invert(27%) sepia(98%) saturate(4389%) hue-rotate(213deg) brightness(101%) contrast(98%);
+}
+
+.alert-circle {
+  background-image: url("../icons/alert-circle.svg");
+}
+
+.alert-triangle {
+  background-image: url("../icons/alert-triangle.svg");
+}
+
+.arrow-back {
+  background-image: url("../icons/arrow-back.svg");
+}
+
+.arrow-down-left {
+  background-image: url("../icons/arrow-down-left.svg");
+}
+
+.arrow-down-right {
+  background-image: url("../icons/arrow-down-right.svg");
+}
+
+.arrow-down {
+  background-image: url("../icons/arrow-down.svg");
+}
+
+.arrow-left {
+  background-image: url("../icons/arrow-left.svg");
+}
+
+.arrow-narrow-down {
+  background-image: url("../icons/arrow-narrow-down.svg");
+}
+
+.arrow-narrow-left {
+  background-image: url("../icons/arrow-narrow-left.svg");
+}
+
+.arrow-narrow-right {
+  background-image: url("../icons/arrow-narrow-right.svg");
+}
+
+.arrow-narrow-up {
+  background-image: url("../icons/arrow-narrow-up.svg");
+}
+
+.arrow-right {
+  background-image: url("../icons/arrow-right.svg");
+}
+
+.arrow-up-left {
+  background-image: url("../icons/arrow-up-left.svg");
+}
+
+.arrow-up-right {
+  background-image: url("../icons/arrow-up-right.svg");
+}
+
+.arrow-up {
+  background-image: url("../icons/arrow-up.svg");
+}
+
+.battery-1 {
+  background-image: url("../icons/battery-1.svg");
+}
+
+.battery-4 {
+  background-image: url("../icons/battery-4.svg");
+}
+
+.bell-off {
+  background-image: url("../icons/bell-off.svg");
+}
+
+.bell {
+  background-image: url("../icons/bell.svg");
+}
+
+.bookmark {
+  background-image: url("../icons/bookmark.svg");
+}
+
+.calendar-event {
+  background-image: url("../icons/calendar-event.svg");
+}
+
+.calendar-month {
+  background-image: url("../icons/calendar-month.svg");
+}
+
+.calendar {
+  background-image: url("../icons/calendar.svg");
+}
+
+.camera-off {
+  background-image: url("../icons/camera-off.svg");
+}
+
+.camera {
+  background-image: url("../icons/camera.svg");
+}
+
+.cancel {
+  background-image: url("../icons/cancel.svg");
+}
+
+.caret-down {
+  background-image: url("../icons/caret-down.svg");
+}
+
+.caret-left {
+  background-image: url("../icons/caret-left.svg");
+}
+
+.caret-right {
+  background-image: url("../icons/caret-right.svg");
+}
+
+.caret-up {
+  background-image: url("../icons/caret-up.svg");
+}
+
+.carousel-indicator-active {
+  background-image: url("../icons/carousel-indicator-active.svg");
+}
+
+.carousel-indicator-inactive {
+  background-image: url("../icons/carousel-indicator-inactive.svg");
+}
+
+.check {
+  background-image: url("../icons/check.svg");
+}
+
+.checkbox-empty {
+  background-image: url("../icons/checkbox-empty.svg");
+}
+
+.checkbox-indeterminate {
+  background-image: url("../icons/checkbox-indeterminate.svg");
+}
+
+.checkbox-selected {
+  background-image: url("../icons/checkbox-selected.svg");
+}
+
+.checkbox {
+  background-image: url("../icons/checkbox.svg");
+}
+
+.chevron-down {
+  background-image: url("../icons/chevron-down.svg");
+}
+
+.chevron-left {
+  background-image: url("../icons/chevron-left.svg");
+}
+
+.chevron-right {
+  background-image: url("../icons/chevron-right.svg");
+}
+
+.chevron-up {
+  background-image: url("../icons/chevron-up.svg");
+}
+
+.chevrons-down {
+  background-image: url("../icons/chevrons-down.svg");
+}
+
+.chevrons-left {
+  background-image: url("../icons/chevrons-left.svg");
+}
+
+.chevrons-right {
+  background-image: url("../icons/chevrons-right.svg");
+}
+
+.chevrons-up {
+  background-image: url("../icons/chevrons-up.svg");
+}
+
+.circle-arrow-up-right {
+  background-image: url("../icons/circle-arrow-up-right.svg");
+}
+
+.clock {
+  background-image: url("../icons/clock.svg");
+}
+
+.close {
+  background-image: url("../icons/close.svg");
+}
+
+.cloud-download {
+  background-image: url("../icons/cloud-download.svg");
+}
+
+.cloud-upload {
+  background-image: url("../icons/cloud-upload.svg");
+}
+
+.code {
+  background-image: url("../icons/code.svg");
+}
+
+.command {
+  background-image: url("../icons/command.svg");
+}
+
+.components {
+  background-image: url("../icons/components.svg");
+}
+
+.device-desktop {
+  background-image: url("../icons/device-desktop.svg");
+}
+
+.device-floppy {
+  background-image: url("../icons/device-floppy.svg");
+}
+
+.device-laptop {
+  background-image: url("../icons/device-laptop.svg");
+}
+
+.device-mobile {
+  background-image: url("../icons/device-mobile.svg");
+}
+
+.device-watch {
+  background-image: url("../icons/device-watch.svg");
+}
+
+.dots-vertical {
+  background-image: url("../icons/dots-vertical.svg");
+}
+
+.dots {
+  background-image: url("../icons/dots.svg");
+}
+
+.download {
+  background-image: url("../icons/download.svg");
+}
+
+.drag-horizontal {
+  background-image: url("../icons/drag-horizontal.svg");
+}
+
+.drag-vertical {
+  background-image: url("../icons/drag-vertical.svg");
+}
+
+.external-link {
+  background-image: url("../icons/external-link.svg");
+}
+
+.eye-closed {
+  background-image: url("../icons/eye-closed.svg");
+}
+
+.eye-off {
+  background-image: url("../icons/eye-off.svg");
+}
+
+.eye {
+  background-image: url("../icons/eye.svg");
+}
+
+.facebook {
+  background-image: url("../icons/facebook.svg");
+}
+
+.file {
+  background-image: url("../icons/file.svg");
+}
+
+.filter-list {
+  background-image: url("../icons/filter-list.svg");
+}
+
+.filter-off {
+  background-image: url("../icons/filter-off.svg");
+}
+
+.filter {
+  background-image: url("../icons/filter.svg");
+}
+
+.flag-off {
+  background-image: url("../icons/flag-off.svg");
+}
+
+.flag {
+  background-image: url("../icons/flag.svg");
+}
+
+.folder-open {
+  background-image: url("../icons/folder-open.svg");
+}
+
+.folder {
+  background-image: url("../icons/folder.svg");
+}
+
+.headphones-off {
+  background-image: url("../icons/headphones-off.svg");
+}
+
+.headphones {
+  background-image: url("../icons/headphones.svg");
+}
+
+.heart-filled {
+  background-image: url("../icons/heart-filled.svg");
+}
+
+.heart {
+  background-image: url("../icons/heart.svg");
+}
+
+.home {
+  background-image: url("../icons/home.svg");
+}
+
+.info-circle {
+  background-image: url("../icons/info-circle.svg");
+}
+
+.info-triangle {
+  background-image: url("../icons/info-triangle.svg");
+}
+
+.instagram {
+  background-image: url("../icons/instagram.svg");
+}
+
+.language {
+  background-image: url("../icons/language.svg");
+}
+
+.layout-grid {
+  background-image: url("../icons/layout-grid.svg");
+}
+
+.link-off {
+  background-image: url("../icons/link-off.svg");
+}
+
+.link {
+  background-image: url("../icons/link.svg");
+}
+
+.linkedin {
+  background-image: url("../icons/linkedin.svg");
+}
+
+.list {
+  background-image: url("../icons/list.svg");
+}
+
+.lock-open {
+  background-image: url("../icons/lock-open.svg");
+}
+
+.lock {
+  background-image: url("../icons/lock.svg");
+}
+
+.login {
+  background-image: url("../icons/login.svg");
+}
+
+.logout {
+  background-image: url("../icons/logout.svg");
+}
+
+.mail {
+  background-image: url("../icons/mail.svg");
+}
+
+.map-pin {
+  background-image: url("../icons/map-pin.svg");
+}
+
+.map {
+  background-image: url("../icons/map.svg");
+}
+
+.menu {
+  background-image: url("../icons/menu.svg");
+}
+
+.message-2 {
+  background-image: url("../icons/message-2.svg");
+}
+
+.message-circle {
+  background-image: url("../icons/message-circle.svg");
+}
+
+.moon {
+  background-image: url("../icons/moon.svg");
+}
+
+.mouse-2 {
+  background-image: url("../icons/mouse-2.svg");
+}
+
+.pencil-off {
+  background-image: url("../icons/pencil-off.svg");
+}
+
+.pencil {
+  background-image: url("../icons/pencil.svg");
+}
+
+.phone-incoming {
+  background-image: url("../icons/phone-incoming.svg");
+}
+
+.phone-off {
+  background-image: url("../icons/phone-off.svg");
+}
+
+.phone-outgoing {
+  background-image: url("../icons/phone-outgoing.svg");
+}
+
+.phone-x {
+  background-image: url("../icons/phone-x.svg");
+}
+
+.phone {
+  background-image: url("../icons/phone.svg");
+}
+
+.photo-circle {
+  background-image: url("../icons/photo-circle.svg");
+}
+
+.photo {
+  background-image: url("../icons/photo.svg");
+}
+
+.player-eject {
+  background-image: url("../icons/player-eject.svg");
+}
+
+.player-pause {
+  background-image: url("../icons/player-pause.svg");
+}
+
+.player-play {
+  background-image: url("../icons/player-play.svg");
+}
+
+.player-stop {
+  background-image: url("../icons/player-stop.svg");
+}
+
+.player-track-next {
+  background-image: url("../icons/player-track-next.svg");
+}
+
+.player-track-prev {
+  background-image: url("../icons/player-track-prev.svg");
+}
+
+.plus {
+  background-image: url("../icons/plus.svg");
+}
+
+.printer {
+  background-image: url("../icons/printer.svg");
+}
+
+.question-circle {
+  background-image: url("../icons/question-circle.svg");
+}
+
+.radio-button-empty {
+  background-image: url("../icons/radio-button-empty.svg");
+}
+
+.radio-button-selected {
+  background-image: url("../icons/radio-button-selected.svg");
+}
+
+.refresh {
+  background-image: url("../icons/refresh.svg");
+}
+
+.repeat {
+  background-image: url("../icons/repeat.svg");
+}
+
+.rotate-clockwise {
+  background-image: url("../icons/rotate-clockwise.svg");
+}
+
+.rotate {
+  background-image: url("../icons/rotate.svg");
+}
+
+.scissors {
+  background-image: url("../icons/scissors.svg");
+}
+
+.search {
+  background-image: url("../icons/search.svg");
+}
+
+.settings {
+  background-image: url("../icons/settings.svg");
+}
+
+.shield-checkered {
+  background-image: url("../icons/shield-checkered.svg");
+}
+
+.shopping-cart {
+  background-image: url("../icons/shopping-cart.svg");
+}
+
+.sort-ascending {
+  background-image: url("../icons/sort-ascending.svg");
+}
+
+.sort-descending {
+  background-image: url("../icons/sort-descending.svg");
+}
+
+.star-filled {
+  background-image: url("../icons/star-filled.svg");
+}
+
+.star-half-filled {
+  background-image: url("../icons/star-half-filled.svg");
+}
+
+.star {
+  background-image: url("../icons/star.svg");
+}
+
+.sun-high {
+  background-image: url("../icons/sun-high.svg");
+}
+
+.sun-low {
+  background-image: url("../icons/sun-low.svg");
+}
+
+.sun {
+  background-image: url("../icons/sun.svg");
+}
+
+.switch-3 {
+  background-image: url("../icons/switch-3.svg");
+}
+
+.tag {
+  background-image: url("../icons/tag.svg");
+}
+
+.thumb-down {
+  background-image: url("../icons/thumb-down.svg");
+}
+
+.thumb-up {
+  background-image: url("../icons/thumb-up.svg");
+}
+
+.unlink {
+  background-image: url("../icons/unlink.svg");
+}
+
+.upload {
+  background-image: url("../icons/upload.svg");
+}
+
+.user-circle {
+  background-image: url("../icons/user-circle.svg");
+}
+
+.user {
+  background-image: url("../icons/user.svg");
+}
+
+.volume-2 {
+  background-image: url("../icons/volume-2.svg");
+}
+
+.volume-3 {
+  background-image: url("../icons/volume-3.svg");
+}
+
+.volume-off {
+  background-image: url("../icons/volume-off.svg");
+}
+
+.volume {
+  background-image: url("../icons/volume.svg");
+}
+
+.world {
+  background-image: url("../icons/world.svg");
+}
+
+.x {
+  background-image: url("../icons/x.svg");
+}
+
+.youtube {
+  background-image: url("../icons/youtube.svg");
+}
+
+/* Dark theme icon inversion */
+.dark-navy .icon img,
+.dark-teal .icon img {
+  filter: brightness(0) invert(1);
 }

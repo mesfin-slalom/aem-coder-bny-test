@@ -215,6 +215,16 @@
 
   /* nav height */
   --nav-height: 64px;
+
+  /* 0. File Utilities - Mode 1 */
+  --title-icon: #000;
+  --nested-icon: #808080;
+  --body: #262626;
+  --caption: #4d4d4d;
+  --link: #0c62fb;
+  --critical-message: #d74544;
+  --visualization: rgb(255 0 0 / 12%);
+  --adobe-red: #e6001f;
 }
 
 /* fallback fonts */
@@ -505,18 +515,6 @@
   --bg-brand-text-bg-blur: var(--sizing-075-12px);
 }
 
-/* 0. File Utilities - Mode 1 */
-:root {
-  --title-icon: #000;
-  --nested-icon: #808080;
-  --body: #262626;
-  --caption: #4d4d4d;
-  --link: #0c62fb;
-  --critical-message: #d74544;
-  --visualization: rgb(255 0 0 / 12%);
-  --adobe-red: #e6001f;
-}
-
 /* ==========================================================================
    HTML5 display definitions
    ========================================================================== */
@@ -583,25 +581,9 @@ html {
   text-size-adjust: 100%;
 }
 
-/**
-  * Remove default margin.
-  */
-
-body {
-  margin: 0;
-}
-
 /* ==========================================================================
     Links
     ========================================================================== */
-
-/**
-  * Address `outline` inconsistency between Chrome and other browsers.
-  */
-
-a:focus {
-  outline: thin dotted;
-}
 
 /**
   * Improve readability when focused and also mouse hovered in all browsers.
@@ -615,16 +597,6 @@ a:hover {
 /* ==========================================================================
     Typography
     ========================================================================== */
-
-/**
-  * Address variable `h1` font-size and margin within `section` and `article`
-  * contexts in Firefox 4+, Safari 5, and Chrome.
-  */
-
-h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
-}
 
 /**
   * Address styling not present in IE 8/9, Safari 5, and Chrome.
@@ -679,14 +651,6 @@ pre,
 samp {
   font-family: monospace, serif;
   font-size: 1em;
-}
-
-/**
-  * Improve readability of pre-formatted text in all browsers.
-  */
-
-pre {
-  white-space: pre-wrap;
 }
 
 /**
@@ -779,21 +743,6 @@ fieldset {
 legend {
   border: 0;
   padding: 0;
-}
-
-/**
-  * 1. Correct font family not being inherited in all browsers.
-  * 2. Correct font size not being inherited in all browsers.
-  * 3. Address margins set differently in Firefox 4+, Safari 5, and Chrome.
-  */
-
-button,
-input,
-select,
-textarea {
-  font-family: inherit;
-  font-size: 100%;
-  margin: 0;
 }
 
 /**
@@ -898,15 +847,6 @@ textarea {
     Tables
     ========================================================================== */
 
-/**
-  * Remove most spacing between table cells.
-  */
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
 .root {
   overflow: hidden;
 }
@@ -944,7 +884,9 @@ input,
 textarea,
 select,
 button {
-  font: inherit;
+  font-family: inherit;
+  font-size: 100%;
+  margin: 0;
 }
 
 /* links */
@@ -1369,10 +1311,6 @@ blockquote {
   margin-bottom: var(--type-body-lg, 24px);
 }
 
-p {
-  font-size: var(--type-body-sm-base);
-}
-
 code,
 pre {
   font-size: var(--type-body-sm-base);
@@ -1383,7 +1321,7 @@ pre {
   border-radius: 8px;
   background-color: var(--color-gray-025);
   overflow-x: auto;
-  white-space: pre;
+  white-space: pre-wrap;
 }
 
 /* subtitle styles */
@@ -1452,6 +1390,8 @@ label {
 /* table styling */
 table {
   border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
   width: 100%;
   height: auto;
   text-align: left;
