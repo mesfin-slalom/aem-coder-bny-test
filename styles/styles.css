@@ -1040,6 +1040,41 @@ a.button:has(span.icon) img {
   filter: brightness(0) saturate(100%) invert(9%) sepia(15%) saturate(7029%) hue-rotate(184deg) brightness(99%) contrast(97%);
 }
 
+a.button:any-link .icon,
+button.button .icon {
+  width: var(--sizing-125-20px);
+  height: var(--sizing-125-20px);
+}
+
+a.button[title=""]:has(span.icon),
+button.button[title=""]:has(span.icon) {
+  min-width: unset;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: var(--sizing-013-2px) solid transparent;
+}
+
+@media (700px <= width <= 1024px) {
+  a.button:any-link .icon,
+  button.button .icon {
+    width: var(--sizing-150-24px);
+    height: var(--sizing-150-24px);
+  }
+}
+
+@media (width > 1024px) {
+  a.button:any-link .icon,
+  button.button .icon {
+    width: var(--sizing-200-32px);
+    height: var(--sizing-200-32px);
+  }
+}
+
+a.button:has(span.icon) img {
+  filter: brightness(0) saturate(100%) invert(9%) sepia(15%) saturate(7029%) hue-rotate(184deg) brightness(99%) contrast(97%);
+}
+
 a.button:hover,
 button.button:hover {
   background-color: var(--bg-neutral-hover);
@@ -1113,6 +1148,10 @@ button.button.secondary {
 }
 
 a.button.secondary[title=""]:has(span.icon).secondary {
+  border-color: var(--stroke-brand-brand);
+}
+
+a.button.secondary[title=""]:has(span.icon) {
   border-color: var(--stroke-brand-brand);
 }
 
