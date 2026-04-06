@@ -1,0 +1,90 @@
+/* Import component-specific tokens */
+@import url('./accordion-tokens.css');
+
+/* accordion block styles */
+.accordion details {
+  display: block;
+  border: none;
+  border-bottom: var(--sizing-006-1px) solid var(--stroke-neutral-primary);
+}
+
+.accordion details summary {
+  position: relative;
+  background-color: var(--bg-neutral-primary);
+  padding: var(--accordion-header-padding-y) var(--accordion-header-padding-x);
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  list-style: none;
+  overflow: auto;
+  transition: background-color var(--accordion-transition);
+  color: var(--fg-neutral-primary);
+  font-family: var(--type-default);
+  font-size: var(--type-body-sm-base);
+  font-weight: var(--type-font-weight-bold);
+}
+
+.accordion details summary p {
+  margin: 0;
+  padding: 0;
+}
+
+.accordion details summary:focus-visible {
+  border-radius: var(--radius-063);
+  outline: none;
+  border: var(--sizing-013-2px) solid var(--fg-neutral-primary);
+  padding: calc(var(--sizing-100-16px-base) - 2px) calc(var(--sizing-150-24px) - 2px);
+  background-color: var(--bg-neutral-primary);
+}
+
+.accordion details[open] summary {
+  background-color: var(--bg-neutral-primary);
+}
+
+.accordion details summary:hover {
+  background: var(--accordion-header-hover-bg);
+}
+
+.accordion details summary:active {
+  background: var(--bg-neutral-active);
+}
+
+.accordion details summary::-webkit-details-marker {
+  display: none;
+}
+
+.accordion details summary::after {
+  flex-shrink: 0;
+  content: '';
+  width: var(--accordion-icon-size);
+  height: var(--accordion-icon-size);
+  background-image: url("../../icons/chevron-down.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: var(--accordion-transition);
+}
+
+.accordion details[open] summary::after {
+  background-image: url("../../icons/chevron-up.svg");
+}
+
+.accordion details .accordion-item-body {
+  padding: 0 var(--accordion-body-padding-x) var(--accordion-body-padding-bottom);
+  display: flex;
+  align-items: center;
+  gap: var(--sizing-150-24px);
+  align-self: stretch;
+  font-size: var(--type-body-sm-base);
+}
+
+.accordion details:not([open]) .accordion-item-body {
+  display: none;
+}
+
+.accordion details[open] .accordion-item-body {
+  display: block;
+  padding: 0 var(--sizing-150-24px) var(--sizing-200-32px);
+  background-color: var(--bg-neutral-primary);
+}

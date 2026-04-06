@@ -1,0 +1,69 @@
+VISUAL MEASUREMENT CHECKLIST FOR accordion
+================================================
+Extracted from Figma node: 2081:3761
+Date: 2026-04-02
+
+LAYOUT & DIMENSIONS
+☑ Container width: 1024px (source: data-node-id="2189:922" w-[1024px])
+☑ Container height: auto (source: h-fit in extraction)
+☑ Container padding: top 0px right 0px bottom 0px left 0px (source: no padding classes on container)
+☑ Grid/Flex gap: 0px (source: flex-col with no gap on container "Accordion" node)
+☑ Column count: 1 (source: flex-col layout, single column)
+☑ Item width: 100% (source: w-full on List Item)
+☑ Item height: auto (source: h-fit on List Item)
+
+SPACING (EXACT PIXELS)
+☑ Section padding: 0px (source: no padding on outer Accordion frame)
+☑ Item header padding: 16px 24px 16px 24px (source: px-[24px] py-[16px] on Header)
+☑ Item content padding: 0px 24px 32px 24px (source: pr-[24px] pb-[32px] pl-[24px] on Content)
+☑ Gap between items: 0px (source: no gap or margin between List Items, borders collapse)
+☑ Header gap (label to icon): 16px (source: gap-[16px] on Header)
+☑ Image margin/padding: 0px (source: no images in base accordion)
+
+COLORS (EXACT HEX + OPACITY)
+☑ Background color: transparent (opacity: 100%) (source: no bg class on container)
+☑ Primary text color (label): #04243c (source: text-[#04243c] on Header label)
+☑ Secondary text color (body): #021624 (source: text-[#021624] on Content text)
+☑ Accent/link color: none (source: no link colors in extraction)
+☑ Border color: #999999 (opacity: 100%) (source: border-[#999999] on List Item)
+☑ Hover background: none specified (source: no hover state in static Figma extraction)
+☑ Hover text color: none specified (source: no hover state in static Figma extraction)
+☑ Open/Active background: none specified (source: Figma shows no distinct bg for open state)
+
+TYPOGRAPHY (ALL PROPERTIES)
+☑ Heading font-family: 'Roboto', sans-serif (source: font-['roboto',sans-serif] on label)
+☑ Heading font-size: 16px (source: text-[16px] on label)
+☑ Heading font-weight: 700/bold (source: font-bold on label)
+☑ Heading line-height: 24px (source: leading-[24px] on label)
+☑ Heading letter-spacing: 0 (source: no letter-spacing class in extraction)
+☑ Heading text-transform: none (source: no text-transform class in extraction)
+☑ Heading font-style: normal (source: no italic class in extraction)
+☑ Body font-family: 'Roboto', sans-serif (source: font-['roboto',sans-serif] on content)
+☑ Body font-size: 16px (source: text-[16px] on content text)
+☑ Body font-weight: 400/normal (source: font-normal on content text)
+☑ Body line-height: 24px (source: leading-[24px] on content text)
+☑ Body letter-spacing: 0 (source: no letter-spacing class in extraction)
+☑ Body font-style: normal (source: no italic class in extraction)
+
+BORDERS & RADIUS
+☑ Border width: 1px (source: border-[1px] on List Item)
+☑ Border style: solid (source: border-solid on List Item)
+☑ Border color: #999999 (source: border-[#999999] on List Item)
+☑ Border radius: 0px (source: no rounded-* classes on List Item)
+
+SHADOWS (EXACT VALUES)
+☑ Box-shadow offset-x: 0px (source: no shadow classes in extraction)
+☑ Box-shadow offset-y: 0px (source: no shadow classes in extraction)
+☑ Box-shadow blur: 0px (source: no shadow classes in extraction)
+☑ Box-shadow spread: 0px (source: no shadow classes in extraction)
+☑ Box-shadow color: none (source: no shadow classes in extraction)
+
+EFFECTS & TRANSITIONS
+☑ Hover transform: none (source: no hover state in Figma extraction)
+☑ Transition duration: 200ms (source: standard accordion transition)
+☑ Transition timing: ease (source: standard accordion transition)
+☑ Opacity changes: none (source: no opacity classes in extraction)
+
+ICON PROPERTIES
+☑ Icon size: 24x24px (source: w-[24px] h-[24px] on chevron)
+☑ Icon type: chevron-down (collapsed) / chevron-up (expanded) (source: ASSETS object)
