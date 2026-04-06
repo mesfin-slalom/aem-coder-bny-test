@@ -1,0 +1,61 @@
+/* BNY Icon Styles — extends base .icon from styles.css */
+
+/* Icon sizing variants */
+.icon-size-sm {
+  width: var(--sizing-100-16px-base);
+  height: var(--sizing-100-16px-base);
+}
+
+.icon-size-md {
+  width: var(--sizing-150-24px);
+  height: var(--sizing-150-24px);
+}
+
+.icon-size-lg {
+  width: var(--sizing-200-32px);
+  height: var(--sizing-200-32px);
+}
+
+/* Icon color — inherits currentColor for stroke-based Tabler icons */
+.icon img,
+.icon svg {
+  color: inherit;
+}
+
+/* Inline icon alignment */
+p .icon,
+li .icon,
+a .icon,
+span .icon {
+  vertical-align: middle;
+  margin-right: var(--sizing-025-4px);
+}
+
+/* Social icons — specific sizing for footer/header use */
+.icon-brand-facebook,
+.icon-brand-instagram,
+.icon-brand-linkedin,
+.icon-brand-x-filled,
+.icon-brand-youtube,
+.icon-facebook,
+.icon-instagram,
+.icon-linkedin,
+.icon-youtube {
+  width: var(--sizing-150-24px);
+  height: var(--sizing-150-24px);
+}
+
+/* Dark theme icon inversion */
+.dark-navy .icon img,
+.dark-teal .icon img {
+  filter: brightness(0) invert(1);
+}
+
+/* Carousel indicator icons */
+.icon-carousel-indicator-active,
+.icon-carousel-indicator-inactive,
+.icon-carousel-indicator-inactive-taper,
+.icon-carousel-indicator-inactive-taper-small {
+  width: var(--sizing-050-8px);
+  height: var(--sizing-050-8px);
+}
