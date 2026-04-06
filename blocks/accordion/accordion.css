@@ -20,7 +20,6 @@
   list-style: none;
   overflow: auto;
   transition: background-color var(--accordion-transition);
-  font-size: var(--type-body-sm-base);
   color: var(--fg-neutral-primary);
   font-family: var(--type-default);
   font-size: var(--type-body-sm-base);
@@ -32,11 +31,7 @@
   padding: 0;
 }
 
-.accordion details[open] summary {
-  background-color: var(--bg-neutral-primary);
-}
-
-accordion details summary:focus-visible {
+.accordion details summary:focus-visible {
   border-radius: var(--radius-063);
   outline: none;
   border: var(--sizing-013-2px) solid var(--fg-neutral-primary);
@@ -44,12 +39,12 @@ accordion details summary:focus-visible {
   background-color: var(--bg-neutral-primary);
 }
 
-.accordion details summary:hover {
-  background: var(--accordion-header-hover-bg);
+.accordion details[open] summary {
+  background-color: var(--bg-neutral-primary);
 }
 
 .accordion details summary:hover {
-  background: var(--bg-neutral-hover);
+  background: var(--accordion-header-hover-bg);
 }
 
 .accordion details summary:active {
