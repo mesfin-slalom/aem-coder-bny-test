@@ -171,6 +171,11 @@
   transform: translate(-50%, -50%) rotate(-135deg);
 }
 
+.carousel .carousel-navigation-buttons button.slide-prev::after {
+  transform: translate(-50%, -50%) rotate(-135deg);
+  left: calc(50% + 2px);
+}
+
 .carousel .carousel-navigation-buttons button.slide-next::after {
   transform: translate(-50%, -50%) rotate(45deg);
   left: calc(50% - 2px);
