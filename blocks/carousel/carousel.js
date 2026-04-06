@@ -1,5 +1,7 @@
 import { fetchPlaceholders } from '../../scripts/placeholders.js';
 
+const AUTOPLAY_INTERVAL = 5000;
+
 function updateActiveSlide(slide) {
   const block = slide.closest('.carousel');
   const slideIndex = parseInt(slide.dataset.slideIndex, 10);
@@ -8,6 +10,13 @@ function updateActiveSlide(slide) {
   const slides = block.querySelectorAll('.carousel-slide');
   slides.forEach((aSlide, idx) => {
     aSlide.setAttribute('aria-hidden', idx !== slideIndex);
+    aSlide.querySelectorAll('a').forEach((link) => {
+      if (idx !== slideIndex) {
+        link.setAttribute('tabindex', '-1');
+      } else {
+        link.removeAttribute('tabindex');
+      }
+    });
   });
 
   const indicators = block.querySelectorAll('.carousel-slide-indicator');
@@ -26,11 +35,31 @@ function showSlide(block, slideIndex = 0) {
   if (slideIndex >= slides.length) realSlideIndex = 0;
   const activeSlide = slides[realSlideIndex];
 
+  activeSlide.querySelectorAll('a').forEach((link) => link.removeAttribute('tabindex'));
   block.querySelector('.carousel-slides').scrollTo({
     top: 0,
     left: activeSlide.offsetLeft,
     behavior: 'smooth',
   });
+}
+
+function startAutoplay(block) {
+  if (block.carouselAutoplayInterval) return; // Prevent multiple intervals
+  const intervalId = setInterval(() => {
+    const slides = block.querySelectorAll('.carousel-slide');
+    const currentIndex = parseInt(block.dataset.activeSlide, 10) || 0;
+    let nextIndex = currentIndex + 1;
+    if (nextIndex >= slides.length) nextIndex = 0;
+    showSlide(block, nextIndex);
+  }, AUTOPLAY_INTERVAL);
+  block.carouselAutoplayInterval = intervalId;
+}
+
+function pauseAutoplay(block) {
+  if (block.carouselAutoplayInterval) {
+    clearInterval(block.carouselAutoplayInterval);
+    block.carouselAutoplayInterval = null;
+  }
 }
 
 function bindEvents(block) {
@@ -84,6 +113,8 @@ let carouselId = 0;
 export default async function decorate(block) {
   carouselId += 1;
   block.setAttribute('id', `carousel-${carouselId}`);
+  // Check for 'carousel-autoplay' class
+  const hasAutoplay = block.classList.contains('carousel-autoplay');
   const rows = block.querySelectorAll(':scope > div');
   const isSingleSlide = rows.length < 2;
 
@@ -100,6 +131,7 @@ export default async function decorate(block) {
   block.prepend(slidesWrapper);
 
   let slideIndicators;
+  let controlsWrapper;
   if (!isSingleSlide) {
     const slideNavBar = document.createElement('div');
     slideNavBar.classList.add('carousel-nav-bar');
@@ -109,22 +141,32 @@ export default async function decorate(block) {
     slideIndicators = document.createElement('ol');
     slideIndicators.classList.add('carousel-slide-indicators');
     slideIndicatorsNav.append(slideIndicators);
-    slideNavBar.append(slideIndicatorsNav);
 
     const slideNavButtons = document.createElement('div');
     slideNavButtons.classList.add('carousel-navigation-buttons');
-    slideNavButtons.innerHTML = `
-      <button type="button" class="slide-prev" aria-label="${placeholders.previousSlide || 'Previous Slide'}"></button>
-      <button type="button" class="slide-next" aria-label="${placeholders.nextSlide || 'Next Slide'}"></button>
-    `;
-    slideNavBar.append(slideNavButtons);
+    // Build navigation buttons HTML
+    let navButtonsHTML = `<button type="button" class="slide-prev" aria-label="${placeholders.previousSlide || 'Previous Slide'}"></button>`;
+    if (hasAutoplay) {
+      navButtonsHTML += '<button type="button" class="carousel-player player-pause" aria-label="Pause"></button>';
+    }
+    navButtonsHTML += `<button type="button" class="slide-next" aria-label="${placeholders.nextSlide || 'Next Slide'}"></button>`;
+    slideNavButtons.innerHTML = navButtonsHTML;
 
-    block.append(slideNavBar);
+    controlsWrapper = document.createElement('div');
+    controlsWrapper.classList.add('carousel-controls-wrapper');
+    controlsWrapper.append(slideNavButtons);
+    controlsWrapper.append(slideNavBar);
+    // Will append after container below
   }
 
   rows.forEach((row, idx) => {
     const slide = createSlide(row, idx, carouselId);
     slidesWrapper.append(slide);
+
+    const hasButton = slide.querySelector('.button');
+
+    if (hasButton) {
+      hasButton.classList.add('primary');
 
     if (slideIndicators) {
       const indicator = document.createElement('li');
@@ -139,7 +181,52 @@ export default async function decorate(block) {
   container.append(slidesWrapper);
   block.prepend(container);
 
+  // Append controls wrapper after container
+  if (controlsWrapper) {
+    block.append(controlsWrapper);
+  }
+
   if (!isSingleSlide) {
     bindEvents(block);
+    if (hasAutoplay) {
+      // Start autoplay after initial render
+      setTimeout(() => {
+        // Ensure the first slide is shown and activeSlide is set
+        if (!block.dataset.activeSlide) {
+          showSlide(block, 0, 'auto');
+        }
+        startAutoplay(block);
+        // Pause on hover, resume on mouse leave
+        block.carouselPausedByButton = false;
+        block.addEventListener('mouseenter', () => {
+          pauseAutoplay(block);
+        });
+        block.addEventListener('mouseleave', () => {
+          if (!block.carouselPausedByButton) {
+            startAutoplay(block);
+          }
+        });
+
+        // Add click event for pause/play button
+        const playerBtn = block.querySelector('.carousel-player');
+        if (playerBtn) {
+          playerBtn.addEventListener('click', () => {
+            if (playerBtn.classList.contains('player-pause')) {
+              pauseAutoplay(block);
+              block.carouselPausedByButton = true;
+              playerBtn.classList.remove('player-pause');
+              playerBtn.classList.add('player-play');
+              playerBtn.setAttribute('aria-label', 'Play');
+            } else {
+              block.carouselPausedByButton = false;
+              startAutoplay(block);
+              playerBtn.classList.remove('player-play');
+              playerBtn.classList.add('player-pause');
+              playerBtn.setAttribute('aria-label', 'Pause');
+            }
+          });
+        }
+      }, 0);
+    }
   }
 }
