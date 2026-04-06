@@ -4,7 +4,7 @@
 /* accordion block styles */
 .accordion details {
   display: block;
-  border: none
+  border: none;
   border-bottom: var(--sizing-006-1px) solid var(--stroke-neutral-primary);
 }
 
