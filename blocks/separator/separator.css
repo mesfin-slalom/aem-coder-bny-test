@@ -1,0 +1,32 @@
+/* Separator block */
+.separator hr {
+  border: none;
+  border-top: var(--sizing-006-1px) solid var(--color-navy-100);
+  margin: 0;
+  width: 100%;
+}
+
+/* Show Color variant (default visible stroke) */
+.separator.show-color hr {
+  border-top-color: var(--color-navy-100);
+}
+
+/* Hide Color variant (invisible rule, aria-hidden applied via JS) */
+.separator.hide-color hr {
+  border-top-color: transparent;
+}
+
+/* Small Space variant */
+.separator.small-space hr {
+  padding: var(--sizing-075-12px) 0;
+}
+
+/* Medium Space variant */
+.separator.medium-space hr {
+  padding: var(--sizing-150-24px) 0;
+}
+
+/* Large Space variant */
+.separator.large-space hr {
+  padding: var(--sizing-300-48px) 0;
+}
