@@ -233,6 +233,18 @@ export default async function decorate(block) {
     brandLink.closest('.button-container').className = '';
   }
 
+  // Replace brand text with logo image
+  const brandAnchor = navBrand.querySelector('a');
+  if (brandAnchor && !brandAnchor.querySelector('img')) {
+    const logo = document.createElement('img');
+    logo.src = '/icons/bny-logo.png';
+    logo.alt = brandAnchor.textContent.trim() || 'BNY';
+    logo.width = 111;
+    logo.height = 24;
+    brandAnchor.textContent = '';
+    brandAnchor.appendChild(logo);
+  }
+
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
     getTopLevelItems(navSections).forEach((navSection) => {

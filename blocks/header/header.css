@@ -118,7 +118,7 @@ header nav .mega-menu .mega-menu-links a:any-link:focus-visible {
 /* mega menu teaser CTA states — outside media query */
 header nav .mega-menu .mega-menu-teaser-cta a:any-link {
   display: block;
-  font-weight: 400;
+  font-weight: 600;
   font-size: var(--type-body-sm-base);
   color: var(--fg-neutral-primary);
   text-decoration: none;
@@ -308,7 +308,8 @@ header nav .nav-sections ul > li > ul > li {
     align-self: unset;
   }
 
-  header nav .nav-sections .nav-drop {
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop,
+  header nav .nav-sections > div > div > ul > li.nav-drop {
     position: static;
     cursor: pointer;
     padding: var(--sizing-025-4px) var(--sizing-050-8px);
@@ -359,9 +360,10 @@ header nav .nav-sections ul > li > ul > li {
     top: 100%;
     z-index: 10;
     flex-direction: row;
+    justify-content: space-between;
     gap: var(--sizing-300-48px);
     padding: var(--sizing-300-48px);
-    padding-left: calc(111px + var(--sizing-300-48px) + var(--sizing-150-24px));
+    padding-left: calc(111px + var(--sizing-300-48px));
     background: var(--bg-neutral-primary, #fff);
     border-top: var(--sizing-006-1px) solid var(--color-gray-100);
     box-shadow: 0 4px 8px -4px rgb(1 7 12 / 4%);
@@ -375,16 +377,16 @@ header nav .nav-sections ul > li > ul > li {
   /* link columns area */
   header nav .mega-menu-columns {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, auto);
     gap: var(--sizing-150-24px) var(--sizing-300-48px);
-    flex: 1 1 auto;
+    flex: 0 1 auto;
   }
 
   header nav .mega-menu-group {
     display: flex;
     flex-direction: column;
     gap: var(--sizing-050-8px);
-    min-width: 160px;
+    min-width: 0;
   }
 
   header nav .mega-menu-heading {
@@ -410,7 +412,7 @@ header nav .nav-sections ul > li > ul > li {
     display: flex;
     gap: var(--sizing-150-24px);
     justify-content: flex-end;
-    flex-shrink: 0;
+    flex-shrink: 1;
   }
 
   header nav .mega-menu-teaser-card {
@@ -418,7 +420,8 @@ header nav .nav-sections ul > li > ul > li {
     flex-direction: column;
     gap: var(--sizing-200-32px);
     max-width: 288px;
-    width: 288px;
+    min-width: 220px;
+    flex: 1 1 288px;
     border-radius: var(--radius-075);
     background-color: var(--bg-neutral-primary);
     box-shadow:
