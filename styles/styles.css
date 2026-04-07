@@ -1058,6 +1058,10 @@ a.button.secondary[title=""]:has(span.icon).secondary {
   border-color: var(--stroke-brand-brand);
 }
 
+a.button.secondary[title=""]:has(span.icon) {
+  border-color: var(--stroke-brand-brand);
+}
+
 a.button.secondary:hover,
 button.button.secondary:hover {
   background: linear-gradient(0deg, var(--bg-neutral-hover, rgb(0 0 0 / 4%)) 0%, var(--bg-neutral-hover, rgb(0 0 0 / 4%)) 100%), var(--bg-neutral-primary, #FFF);
