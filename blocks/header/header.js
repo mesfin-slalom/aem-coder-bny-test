@@ -117,6 +117,10 @@ function buildMegaMenu(navDrop) {
       paragraphs.forEach((p) => {
         const link = p.querySelector('a');
         if (link && !p.querySelector('picture')) {
+          const arrow = document.createElement('span');
+          arrow.className = 'mega-menu-teaser-cta-icon';
+          arrow.innerHTML = '<img src="/icons/arrow-right.svg" alt="" width="20" height="20">';
+          link.append(arrow);
           const btnWrap = document.createElement('div');
           btnWrap.className = 'mega-menu-teaser-cta';
           btnWrap.append(p);

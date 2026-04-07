@@ -116,7 +116,9 @@ header nav .mega-menu .mega-menu-links a:any-link:focus-visible {
 
 /* mega menu teaser CTA states — outside media query */
 header nav .mega-menu .mega-menu-teaser-cta a:any-link {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sizing-050-8px);
   font-weight: 600;
   font-size: var(--type-body-sm-base);
   color: var(--fg-neutral-primary);
@@ -124,10 +126,19 @@ header nav .mega-menu .mega-menu-teaser-cta a:any-link {
   padding: var(--sizing-025-4px) var(--sizing-050-8px);
   border-radius: var(--radius-050);
   transition: background-color 200ms ease;
+  white-space: nowrap;
 }
 
-header nav .mega-menu .mega-menu-teaser-cta a:any-link::after {
-  content: ' \2192';
+header nav .mega-menu .mega-menu-teaser-cta-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+header nav .mega-menu .mega-menu-teaser-cta-icon img {
+  width: var(--sizing-125-20px);
+  height: var(--sizing-125-20px);
+  display: block;
 }
 
 header nav .mega-menu .mega-menu-teaser-cta a:any-link:hover {
