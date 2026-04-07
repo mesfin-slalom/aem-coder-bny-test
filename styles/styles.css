@@ -181,6 +181,9 @@
   --fg-on-error-disabled: rgb(255 255 255 / 40%);
 
   /* background */
+  --bg-neutral-primary: var(--color-white);
+  --bg-neutral-secondary: var(--color-gray-025);
+  --bg-neutral-tertiary: var(--color-gray-050);
   --bg-transparent: rgb(255 255 255 / 0%);
   --bg-neutral-hover: rgb(43 156 174 / 8%);
   --bg-neutral-active: rgb(43 156 174 / 16%);
@@ -1287,8 +1290,11 @@ h6 {
   margin-top: 0;
   margin-bottom: 0.25em;
   font-family: var(--type-heading), oswald-fallback, sans-serif;
-  font-weight: 600;
-  line-height: 1.25;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -2px;
+  text-transform: uppercase;
+  color: var(--fg-brand-main);
   scroll-margin: 40px;
 }
 
@@ -1305,27 +1311,38 @@ h3 a,
 h4 a,
 h5 a,
 h6 a {
-  color: var(--fg-neutral-secondary);
-  text-decoration: underline;
-}
-
-h1:hover a,
-h2:hover a,
-h3:hover a,
-h4:hover a,
-h5:hover a,
-h6:hover a {
-  color: var(--fg-neutral-primary);
+  color: var(--fg-brand-main);
   text-decoration: none;
 }
 
-h1:focus a,
-h2:focus a,
-h3:focus a,
-h4:focus a,
-h5:focus a,
-h6:focus a {
-  outline: var(--sizing-013-2px) solid var(--fg-neutral-primary);
+h1 a:hover,
+h2 a:hover,
+h3 a:hover,
+h4 a:hover,
+h5 a:hover,
+h6 a:hover {
+  color: var(--fg-neutral-secondary);
+  text-decoration: none;
+}
+
+h1 a:active,
+h2 a:active,
+h3 a:active,
+h4 a:active,
+h5 a:active,
+h6 a:active {
+  color: var(--color-teal-700);
+}
+
+h1 a:focus,
+h2 a:focus,
+h3 a:focus,
+h4 a:focus,
+h5 a:focus,
+h6 a:focus {
+  color: var(--fg-brand-main);
+  outline: var(--sizing-013-2px) solid var(--stroke-focus-brand);
+  border-radius: var(--radius-063);
 }
 
 p,
