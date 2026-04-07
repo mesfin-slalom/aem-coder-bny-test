@@ -12,15 +12,15 @@
   display: none;
 }
 
-/* tab button — default (inactive) */
+/* tab button — default (unselected) */
 .tabs .tabs-list button {
   flex: 0 0 max-content;
   margin: 0;
-  border: var(--sizing-006-1px) solid transparent;
-  border-bottom: none;
+  border: none;
+  border-bottom: var(--sizing-013-2px) solid transparent;
   border-radius: 0;
   padding: var(--sizing-100-16px-base) var(--sizing-150-24px);
-  background: none;
+  background: transparent;
   color: var(--fg-neutral-primary);
   font-family: var(--type-default), roboto-fallback, sans-serif;
   font-size: var(--type-body-lg, 24px);
@@ -29,7 +29,7 @@
   text-align: center;
   white-space: nowrap;
   cursor: pointer;
-  transition: color 200ms ease, border-color 200ms ease;
+  transition: background-color 200ms ease, border-color 200ms ease;
   min-width: unset;
 }
 
@@ -37,23 +37,39 @@
   margin: 0;
 }
 
-/* tab button — active */
-.tabs .tabs-list button[aria-selected='true'] {
-  border-color: var(--stroke-brand-brand);
-  font-weight: 700;
-  color: var(--fg-brand-main);
-  cursor: default;
+/* tab button — hover (unselected) */
+.tabs .tabs-list button:hover {
+  background-color: var(--color-teal-050);
 }
 
-/* tab button — hover */
-.tabs .tabs-list button:hover:not([aria-selected='true']) {
-  color: var(--fg-neutral-secondary);
+/* tab button — active (unselected) */
+.tabs .tabs-list button:active {
+  background-color: var(--color-teal-100);
 }
 
 /* tab button — focus */
 .tabs .tabs-list button:focus-visible {
   outline: var(--sizing-013-2px) solid var(--stroke-focus-brand);
   outline-offset: -2px;
+  border-radius: var(--radius-063);
+}
+
+/* tab button — selected default */
+.tabs .tabs-list button[aria-selected='true'] {
+  border-bottom-color: var(--fg-brand-main);
+  font-weight: 700;
+  color: var(--fg-brand-main);
+  cursor: default;
+}
+
+/* tab button — selected hover */
+.tabs .tabs-list button[aria-selected='true']:hover {
+  background-color: var(--color-teal-050);
+}
+
+/* tab button — selected active */
+.tabs .tabs-list button[aria-selected='true']:active {
+  background-color: var(--color-teal-100);
 }
 
 /* tab panel */
@@ -69,6 +85,12 @@
   font-size: var(--type-body-lg, 24px);
   line-height: 1.5;
   margin-top: 0;
+}
+
+.tabs .tabs-panel img {
+  width: 100%;
+  max-width: var(--breakpoint-desktop-wide);
+  height: auto;
 }
 
 /* responsive — tablet */
