@@ -1379,22 +1379,3 @@ table th {
   font-size: var(--type-body-sm-base);
 }
 
-/* separator — horizontal rule */
-main hr {
-  border: none;
-  border-top: var(--sizing-006-1px) solid var(--stroke-brand-brand-subtle);
-  margin: 0;
-}
-
-/* spacer utilities (applied via section metadata) */
-main .spacer-sm {
-  padding: var(--sizing-150-24px) 0;
-}
-
-main .spacer-md {
-  padding: var(--sizing-300-48px) 0;
-}
-
-main .spacer-lg {
-  padding: var(--sizing-600-96px) 0;
-}
