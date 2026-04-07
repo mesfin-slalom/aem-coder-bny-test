@@ -358,9 +358,56 @@ header nav[aria-expanded='true'] .nav-sections {
     text-decoration: none;
   }
 
-  /* Hide teasers on mobile */
+  /* Mobile teasers */
   header nav .mega-menu-teasers {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sizing-100-16px-base);
+    padding: var(--sizing-100-16px-base) 0;
+  }
+
+  header nav .mega-menu-teaser-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-075, 12px);
+    background-color: var(--bg-neutral-primary);
+    box-shadow:
+      0 12px 24px -8px rgb(4 36 60 / 24%),
+      0 4px 8px -4px rgb(4 36 60 / 16%);
+    overflow: hidden;
+  }
+
+  header nav .mega-menu-teaser-image {
+    overflow: hidden;
+  }
+
+  header nav .mega-menu-teaser-image picture {
+    display: block;
+  }
+
+  header nav .mega-menu-teaser-image img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+  }
+
+  header nav .mega-menu-teaser-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--sizing-100-16px-base);
+    padding: var(--sizing-100-16px-base);
+    flex: 1;
+  }
+
+  header nav .mega-menu-teaser-desc p {
+    margin: 0;
+    font-size: var(--type-body-sm-base);
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--fg-neutral-primary);
   }
 
   /* Hide original authored sub-list on mobile too */
