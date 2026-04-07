@@ -31,7 +31,9 @@ function closeOnFocusLost(e) {
     if (navSectionExpanded && isDesktop.matches) {
       // eslint-disable-next-line no-use-before-define
       toggleAllNavSections(navSections, false);
-    } else if (!isDesktop.matches) {
+    } else if (!isDesktop.matches && e.relatedTarget) {
+      // Only close mobile menu if focus explicitly moved outside nav
+      // (not when clicking non-focusable elements like accordion items)
       // eslint-disable-next-line no-use-before-define
       toggleMenu(nav, navSections, false);
     }
@@ -59,6 +61,13 @@ function getTopLevelItems(sections) {
   const container = wrapper || sections.querySelector(':scope > div > div') || sections;
   const ul = container.querySelector(':scope > ul');
   return ul ? [...ul.children] : [];
+}
+
+function collapseAllNavSections(sections) {
+  if (!sections) return;
+  getTopLevelItems(sections).forEach((section) => {
+    section.setAttribute('aria-expanded', 'false');
+  });
 }
 
 function toggleAllNavSections(sections, expanded = false) {
@@ -172,7 +181,13 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   const button = nav.querySelector('.nav-hamburger button');
   document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-  toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
+  if (isDesktop.matches) {
+    // On desktop, always keep sections collapsed (mega menus open on click)
+    toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
+  } else {
+    // On mobile, always start with all sections collapsed
+    collapseAllNavSections(navSections);
+  }
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
   // enable nav dropdown keyboard accessibility
   if (navSections) {
@@ -252,6 +267,23 @@ export default async function decorate(block) {
         navSection.classList.add('nav-drop');
         buildMegaMenu(navSection);
       }
+      // Wrap the bare text node in a header div for mobile accordion layout + states
+      const { firstChild } = navSection;
+      if (firstChild && firstChild.nodeType === Node.TEXT_NODE && firstChild.textContent.trim()) {
+        const header = document.createElement('div');
+        header.className = 'nav-drop-header';
+        header.setAttribute('role', 'button');
+        header.setAttribute('tabindex', '0');
+        const label = document.createElement('span');
+        label.className = 'nav-drop-label';
+        label.textContent = firstChild.textContent.trim();
+        header.append(label);
+        const chevron = document.createElement('span');
+        chevron.className = 'nav-drop-chevron';
+        chevron.innerHTML = '<img src="/icons/chevron-down.svg" alt="" width="20" height="20">';
+        header.append(chevron);
+        navSection.replaceChild(header, firstChild);
+      }
       navSection.addEventListener('click', (e) => {
         if (isDesktop.matches) {
           // Only toggle if clicking the nav-drop itself, not a link inside it
@@ -259,16 +291,40 @@ export default async function decorate(block) {
           const expanded = navSection.getAttribute('aria-expanded') === 'true';
           toggleAllNavSections(navSections);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        } else if (navSection.classList.contains('nav-drop')) {
+          // Mobile accordion: toggle this section, collapse others
+          if (e.target.closest('.mega-menu')) return;
+          const expanded = navSection.getAttribute('aria-expanded') === 'true';
+          collapseAllNavSections(navSections);
+          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }
       });
     });
+  }
+
+  // Build mobile tools (clone of nav-tools items except search) for bottom of mobile nav
+  const navTools = nav.querySelector('.nav-tools');
+  if (navTools && navSections) {
+    const mobileTools = document.createElement('div');
+    mobileTools.className = 'nav-mobile-tools';
+    const toolsContent = navTools.querySelector(':scope > div > div') || navTools.querySelector(':scope > div') || navTools;
+    [...toolsContent.querySelectorAll(':scope > p')].forEach((p) => {
+      const link = p.querySelector('a');
+      if (!link) return;
+      // Skip search icon (empty title)
+      if (link.getAttribute('title') === '') return;
+      const clone = p.cloneNode(true);
+      mobileTools.append(clone);
+    });
+    navSections.append(mobileTools);
   }
 
   // hamburger for mobile
   const hamburger = document.createElement('div');
   hamburger.classList.add('nav-hamburger');
   hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
-      <span class="nav-hamburger-icon"></span>
+      <img class="nav-hamburger-open" src="/icons/menu-2.svg" alt="" width="24" height="24">
+      <img class="nav-hamburger-close" src="/icons/x.svg" alt="" width="24" height="24">
     </button>`;
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
   nav.prepend(hamburger);
