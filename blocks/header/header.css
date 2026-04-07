@@ -10,6 +10,10 @@ header .nav-wrapper {
   box-shadow: 0 4px 8px -4px rgb(1 7 12 / 4%);
 }
 
+header .header {
+  position: relative;
+}
+
 header nav {
   box-sizing: border-box;
   display: grid;
@@ -42,9 +46,12 @@ header nav[aria-expanded='true'] {
   header nav {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 0 var(--sizing-150-24px);
     max-width: var(--breakpoint-desktop-wide);
-    padding: 0 var(--page-margin);
+    padding: var(--sizing-125-20px) var(--sizing-300-48px);
+    height: auto;
+    position: relative;
   }
 
   header nav[aria-expanded='true'] {
@@ -66,6 +73,78 @@ header nav a:any-link {
 
 header nav a:any-link:hover {
   color: var(--fg-neutral-secondary);
+}
+
+/* mega menu link items — states applied to li, a fills the li */
+header nav .mega-menu .mega-menu-links li {
+  padding: var(--sizing-025-4px) var(--sizing-050-8px);
+  border-radius: var(--radius-050);
+  transition: background-color 200ms ease;
+  cursor: pointer;
+}
+
+header nav .mega-menu .mega-menu-links li:hover {
+  background-color: var(--color-teal-050);
+}
+
+header nav .mega-menu .mega-menu-links li:active {
+  background-color: var(--color-teal-100);
+}
+
+header nav .mega-menu .mega-menu-links li:focus-within {
+  outline: var(--sizing-013-2px) solid var(--stroke-focus-brand);
+  outline-offset: -2px;
+  border-radius: var(--radius-063);
+}
+
+header nav .mega-menu .mega-menu-links a:any-link {
+  display: block;
+  font-weight: 400;
+  font-size: var(--type-body-sm-base);
+  color: var(--fg-neutral-primary);
+  line-height: 1.5;
+  text-decoration: none;
+}
+
+header nav .mega-menu .mega-menu-links a:any-link:hover {
+  color: var(--fg-neutral-primary);
+  text-decoration: none;
+}
+
+header nav .mega-menu .mega-menu-links a:any-link:focus-visible {
+  outline: none;
+}
+
+/* mega menu teaser CTA states — outside media query */
+header nav .mega-menu .mega-menu-teaser-cta a:any-link {
+  display: block;
+  font-weight: 400;
+  font-size: var(--type-body-sm-base);
+  color: var(--fg-neutral-primary);
+  text-decoration: none;
+  padding: var(--sizing-025-4px) var(--sizing-050-8px);
+  border-radius: var(--radius-050);
+  transition: background-color 200ms ease;
+}
+
+header nav .mega-menu .mega-menu-teaser-cta a:any-link::after {
+  content: ' \2192';
+}
+
+header nav .mega-menu .mega-menu-teaser-cta a:any-link:hover {
+  color: var(--fg-neutral-primary);
+  background-color: var(--color-teal-050);
+  text-decoration: none;
+}
+
+header nav .mega-menu .mega-menu-teaser-cta a:any-link:active {
+  background-color: var(--color-teal-100);
+}
+
+header nav .mega-menu .mega-menu-teaser-cta a:any-link:focus-visible {
+  outline: var(--sizing-013-2px) solid var(--stroke-focus-brand);
+  outline-offset: -2px;
+  border-radius: var(--radius-063);
 }
 
 /* hamburger */
@@ -154,12 +233,13 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
 header .nav-brand {
   grid-area: brand;
   flex-basis: 128px;
+  flex-shrink: 0;
   line-height: 1;
 }
 
 header nav .nav-brand img {
   width: 111px;
-  height: auto;
+  height: 24px;
 }
 
 /* sections */
@@ -184,6 +264,29 @@ header nav .nav-sections ul {
 
 header nav .nav-sections ul > li {
   font-weight: 400;
+  color: var(--fg-neutral-primary);
+  font-size: var(--type-body-sm-base);
+  line-height: 1.5;
+  padding: var(--sizing-025-4px) var(--sizing-050-8px);
+  border-radius: var(--radius-050);
+  transition: background-color 200ms ease;
+}
+
+header nav .nav-sections > div > div > ul > li:hover,
+header nav .nav-sections .default-content-wrapper > ul > li:hover {
+  background-color: var(--color-teal-050);
+}
+
+header nav .nav-sections > div > div > ul > li:active,
+header nav .nav-sections .default-content-wrapper > ul > li:active {
+  background-color: var(--color-teal-100);
+}
+
+header nav .nav-sections > div > div > ul > li:focus-visible,
+header nav .nav-sections .default-content-wrapper > ul > li:focus-visible {
+  outline: var(--sizing-013-2px) solid var(--stroke-focus-brand);
+  outline-offset: -2px;
+  border-radius: var(--radius-063);
 }
 
 header nav .nav-sections ul > li > ul {
@@ -206,29 +309,28 @@ header nav .nav-sections ul > li > ul > li {
   }
 
   header nav .nav-sections .nav-drop {
-    position: relative;
-    padding-right: var(--sizing-100-16px-base);
+    position: static;
     cursor: pointer;
+    padding: var(--sizing-025-4px) var(--sizing-050-8px);
+    border-radius: var(--radius-050);
+    transition: background-color 200ms ease;
   }
 
-  header nav .nav-sections .nav-drop::after {
-    content: '';
-    display: inline-block;
-    position: absolute;
-    top: 0.5em;
-    right: 2px;
-    transform: rotate(135deg);
-    width: 6px;
-    height: 6px;
-    border: 2px solid currentcolor;
-    border-radius: 0 1px 0 0;
-    border-width: 2px 2px 0 0;
+  /* nav-drop — hover */
+  header nav .nav-sections .nav-drop:hover {
+    background-color: var(--color-teal-050);
   }
 
-  header nav .nav-sections .nav-drop[aria-expanded='true']::after {
-    top: unset;
-    bottom: 0.5em;
-    transform: rotate(315deg);
+  /* nav-drop — active */
+  header nav .nav-sections .nav-drop:active {
+    background-color: var(--color-teal-100);
+  }
+
+  /* nav-drop — focus */
+  header nav .nav-sections .nav-drop:focus-visible {
+    outline: var(--sizing-013-2px) solid var(--stroke-focus-brand);
+    outline-offset: -2px;
+    border-radius: var(--radius-063);
   }
 
   header nav .nav-sections ul {
@@ -237,32 +339,127 @@ header nav .nav-sections ul > li > ul > li {
     margin: 0;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li {
+  header nav .nav-sections .default-content-wrapper > ul > li,
+  header nav .nav-sections > div > div > ul > li {
     flex: 0 1 auto;
     position: relative;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li > ul {
+  /* hide original authored sub-list (replaced by .mega-menu) */
+  header nav .nav-sections .nav-drop > ul {
     display: none;
-    position: relative;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > ul {
-    display: block;
+  /* mega menu panel */
+  header nav .nav-sections .mega-menu {
+    display: none;
     position: absolute;
-    left: calc(var(--sizing-150-24px) * -1);
-    width: 200px;
-    top: 150%;
-    padding: var(--sizing-100-16px-base);
-    background-color: var(--bg-neutral-primary);
-    border: var(--sizing-006-1px) solid var(--color-gray-100);
+    left: 0;
+    right: 0;
+    top: 100%;
+    z-index: 10;
+    flex-direction: row;
+    gap: var(--sizing-300-48px);
+    padding: var(--sizing-300-48px);
+    padding-left: calc(111px + var(--sizing-300-48px) + var(--sizing-150-24px));
+    background: var(--bg-neutral-primary, #fff);
+    border-top: var(--sizing-006-1px) solid var(--color-gray-100);
     box-shadow: 0 4px 8px -4px rgb(1 7 12 / 4%);
     white-space: initial;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
-    padding: var(--sizing-050-8px) 0;
+  header nav .nav-sections .nav-drop[aria-expanded='true'] > .mega-menu {
+    display: flex;
   }
+
+  /* link columns area */
+  header nav .mega-menu-columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sizing-150-24px) var(--sizing-300-48px);
+    flex: 1 1 auto;
+  }
+
+  header nav .mega-menu-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sizing-050-8px);
+    min-width: 160px;
+  }
+
+  header nav .mega-menu-heading {
+    font-weight: 600;
+    font-size: var(--type-body-sm-base);
+    color: var(--fg-neutral-primary);
+    line-height: 1.5;
+    padding: var(--sizing-025-4px) 0;
+  }
+
+  header nav .mega-menu-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+
+  /* teasers area */
+  header nav .mega-menu-teasers {
+    display: flex;
+    gap: var(--sizing-150-24px);
+    justify-content: flex-end;
+    flex-shrink: 0;
+  }
+
+  header nav .mega-menu-teaser-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sizing-200-32px);
+    max-width: 288px;
+    width: 288px;
+    border-radius: var(--radius-075);
+    background-color: var(--bg-neutral-primary);
+    box-shadow:
+      0 12px 24px -8px rgb(4 36 60 / 24%),
+      0 4px 8px -4px rgb(4 36 60 / 16%);
+    overflow: hidden;
+    padding-bottom: var(--sizing-200-32px);
+  }
+
+  header nav .mega-menu-teaser-image {
+    overflow: hidden;
+  }
+
+  header nav .mega-menu-teaser-image picture {
+    display: block;
+  }
+
+  header nav .mega-menu-teaser-image img {
+    width: 100%;
+    height: 162px;
+    object-fit: cover;
+    display: block;
+  }
+
+  header nav .mega-menu-teaser-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--sizing-150-24px);
+    padding: 0 var(--sizing-150-24px);
+    flex: 1;
+  }
+
+  header nav .mega-menu-teaser-desc p {
+    margin: 0;
+    font-size: var(--type-body-sm-base);
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--fg-neutral-primary);
+  }
+
 }
 
 /* tools */
@@ -273,6 +470,65 @@ header nav .nav-tools {
   gap: var(--sizing-200-32px);
 }
 
-header nav .nav-tools a.button {
+header nav .nav-tools > div,
+header nav .nav-tools > div > div {
+  display: flex;
+  align-items: center;
+  gap: var(--sizing-200-32px);
+}
+
+header nav .nav-tools p {
+  margin: 0;
+}
+
+/* nav-tools text link wrapper (p) — states on the p, not the a */
+header nav .nav-tools p:not(:has(.button)) {
+  padding: var(--sizing-025-4px) var(--sizing-050-8px);
+  border-radius: var(--radius-050);
+  transition: background-color 200ms ease;
+  cursor: pointer;
+}
+
+header nav .nav-tools p:not(:has(.button)):hover {
+  background-color: var(--color-teal-050);
+}
+
+header nav .nav-tools p:not(:has(.button)):active {
+  background-color: var(--color-teal-100);
+}
+
+
+/* nav-tools link — styling */
+header nav .nav-tools a:any-link:not(.button) {
+  color: var(--fg-neutral-primary);
   font-size: var(--type-body-sm-base);
+  font-weight: 400;
+  line-height: 1.5;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+header nav .nav-tools a:any-link:not(.button):hover {
+  color: var(--fg-neutral-primary);
+  text-decoration: none;
+}
+
+header nav .nav-tools a:any-link:not(.button):focus-visible {
+  outline: var(--sizing-013-2px) solid var(--stroke-focus-brand);
+  outline-offset: -2px;
+  border-radius: var(--radius-063);
+}
+
+header nav .nav-tools a.button.primary {
+  font-size: var(--type-body-sm-base);
+  font-weight: 600;
+  letter-spacing: 0.32px;
+  white-space: nowrap;
+  padding: var(--sizing-050-8px) var(--sizing-100-16px-base);
+}
+
+/* search icon button */
+header nav .nav-tools a.button[title=""] .icon {
+  width: 32px;
+  height: 32px;
 }

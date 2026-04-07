@@ -181,6 +181,9 @@
   --fg-on-error-disabled: rgb(255 255 255 / 40%);
 
   /* background */
+  --bg-neutral-primary: var(--color-white);
+  --bg-neutral-secondary: var(--color-gray-025);
+  --bg-neutral-tertiary: var(--color-gray-050);
   --bg-transparent: rgb(255 255 255 / 0%);
   --bg-neutral-hover: rgb(43 156 174 / 8%);
   --bg-neutral-active: rgb(43 156 174 / 16%);

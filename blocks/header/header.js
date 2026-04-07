@@ -53,16 +53,112 @@ function focusNavSection() {
   document.activeElement.addEventListener('keydown', openOnKeydown);
 }
 
-/**
- * Toggles all nav sections
- * @param {Element} sections The container element
- * @param {Boolean} expanded Whether the element should be expanded or collapsed
- */
+function getTopLevelItems(sections) {
+  if (!sections) return [];
+  const wrapper = sections.querySelector('.default-content-wrapper');
+  const container = wrapper || sections.querySelector(':scope > div > div') || sections;
+  const ul = container.querySelector(':scope > ul');
+  return ul ? [...ul.children] : [];
+}
+
 function toggleAllNavSections(sections, expanded = false) {
   if (!sections) return;
-  sections.querySelectorAll('.nav-sections .default-content-wrapper > ul > li').forEach((section) => {
+  getTopLevelItems(sections).forEach((section) => {
     section.setAttribute('aria-expanded', expanded);
   });
+}
+
+/**
+ * Builds mega menu DOM from authored nested list structure.
+ * Expects: li > ul containing:
+ *   - li with <strong> heading + nested ul of links = link column group
+ *   - li.mega-menu-teaser with picture + p + p>a = teaser card
+ */
+function buildMegaMenu(navDrop) {
+  const subUl = navDrop.querySelector(':scope > ul');
+  if (!subUl) return;
+
+  const megaMenu = document.createElement('div');
+  megaMenu.className = 'mega-menu';
+
+  const columnsWrapper = document.createElement('div');
+  columnsWrapper.className = 'mega-menu-columns';
+
+  const teasersWrapper = document.createElement('div');
+  teasersWrapper.className = 'mega-menu-teasers';
+
+  [...subUl.children].forEach((li) => {
+    if (li.classList.contains('mega-menu-teaser')) {
+      // Build teaser card
+      const teaser = document.createElement('div');
+      teaser.className = 'mega-menu-teaser-card';
+
+      const picture = li.querySelector('picture');
+      if (picture) {
+        const imgWrap = document.createElement('div');
+        imgWrap.className = 'mega-menu-teaser-image';
+        imgWrap.append(picture);
+        teaser.append(imgWrap);
+      }
+
+      const content = document.createElement('div');
+      content.className = 'mega-menu-teaser-content';
+
+      const paragraphs = li.querySelectorAll(':scope > p');
+      paragraphs.forEach((p) => {
+        const link = p.querySelector('a');
+        if (link && !p.querySelector('picture')) {
+          const btnWrap = document.createElement('div');
+          btnWrap.className = 'mega-menu-teaser-cta';
+          btnWrap.append(p);
+          content.append(btnWrap);
+        } else if (!p.querySelector('picture')) {
+          const desc = document.createElement('div');
+          desc.className = 'mega-menu-teaser-desc';
+          desc.append(p);
+          content.append(desc);
+        }
+      });
+
+      teaser.append(content);
+      teasersWrapper.append(teaser);
+    } else {
+      // Build link column group
+      const group = document.createElement('div');
+      group.className = 'mega-menu-group';
+
+      const strong = li.querySelector(':scope > strong');
+      if (strong) {
+        const heading = document.createElement('div');
+        heading.className = 'mega-menu-heading';
+        heading.textContent = strong.textContent;
+        group.append(heading);
+      }
+
+      const nestedUl = li.querySelector(':scope > ul');
+      if (nestedUl) {
+        const linkList = document.createElement('ul');
+        linkList.className = 'mega-menu-links';
+        [...nestedUl.children].forEach((linkLi) => {
+          const item = document.createElement('li');
+          item.innerHTML = linkLi.innerHTML;
+          linkList.append(item);
+        });
+        group.append(linkList);
+      }
+
+      columnsWrapper.append(group);
+    }
+  });
+
+  megaMenu.append(columnsWrapper);
+  if (teasersWrapper.children.length) {
+    megaMenu.append(teasersWrapper);
+  }
+
+  // Replace the original sub-list with the mega menu
+  subUl.style.display = 'none';
+  navDrop.append(megaMenu);
 }
 
 /**
@@ -139,10 +235,15 @@ export default async function decorate(block) {
 
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
-    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
-      if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
-      navSection.addEventListener('click', () => {
+    getTopLevelItems(navSections).forEach((navSection) => {
+      if (navSection.querySelector('ul')) {
+        navSection.classList.add('nav-drop');
+        buildMegaMenu(navSection);
+      }
+      navSection.addEventListener('click', (e) => {
         if (isDesktop.matches) {
+          // Only toggle if clicking the nav-drop itself, not a link inside it
+          if (e.target.closest('.mega-menu')) return;
           const expanded = navSection.getAttribute('aria-expanded') === 'true';
           toggleAllNavSections(navSections);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
