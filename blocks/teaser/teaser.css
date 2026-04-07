@@ -546,7 +546,6 @@
   }
 
   .teaser .teaser-buttons {
-    flex-direction: column;
     gap: var(--sizing-075-12px);
   }
 
@@ -591,6 +590,17 @@
   .teaser.hero .teaser-content {
     min-height: 360px;
     padding: var(--sizing-150-24px);
+  }
+
+  .teaser.padded-image-left .teaser-content,
+  .teaser.padded-image-right .teaser-content,
+  .teaser.full-bleed-image-left .teaser-content,
+  .teaser.full-bleed-image-right .teaser-content,
+  .teaser.hero-image-left .teaser-content,
+  .teaser.hero-image-right .teaser-content,
+  .teaser.floating-image-left .teaser-content,
+  .teaser.floating-image-right .teaser-content {
+    width: 100%;
   }
 
   .teaser.full-bleed-image-left .teaser-content,
