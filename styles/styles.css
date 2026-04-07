@@ -1086,6 +1086,68 @@ main img {
   height: auto;
 }
 
+/* image with caption */
+main picture + em,
+main .image-caption {
+  display: block;
+  margin-top: var(--sizing-075-12px);
+  font-family: var(--type-default), roboto-fallback, sans-serif;
+  font-size: var(--type-caption);
+  font-style: normal;
+  line-height: 1.5;
+  color: var(--fg-neutral-tertiary);
+}
+
+/* image aspect ratio utilities (applied via section metadata) */
+main .aspect-16-9 picture img {
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+}
+
+main .aspect-1-1 picture img {
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+}
+
+main .aspect-5-4 picture img {
+  aspect-ratio: 5/4;
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+}
+
+main .aspect-4-3 picture img {
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+}
+
+main .aspect-3-2 picture img {
+  aspect-ratio: 3/2;
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+}
+
+main .aspect-2-1 picture img {
+  aspect-ratio: 2/1;
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+}
+
+main .aspect-21-9 picture img {
+  aspect-ratio: 21/9;
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+}
+
 .icon {
   display: inline-block;
   height: 24px;
