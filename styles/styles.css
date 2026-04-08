@@ -1082,6 +1082,37 @@ a.button.secondary.button-disabled:hover {
   pointer-events: none;
 }
 
+/* tertiary button */
+a.button.tertiary,
+button.button.tertiary {
+  background-color: var(--bg-neutral-tertiary);
+  color: var(--fg-neutral-primary);
+  border: none;
+}
+
+a.button.tertiary:hover,
+button.button.tertiary:hover {
+  background-color: var(--bg-neutral-hover);
+}
+
+a.button.tertiary:active,
+button.button.tertiary:active {
+  background-color: var(--bg-neutral-active);
+}
+
+a.button.tertiary:focus-visible,
+button.button.tertiary:focus-visible {
+  outline: var(--sizing-013-2px) solid var(--stroke-focus-brand);
+  outline-offset: var(--sizing-013-2px);
+}
+
+a.button.tertiary.button-disabled,
+a.button.tertiary.button-disabled:hover {
+  background-color: var(--bg-neutral-disabled);
+  color: var(--fg-neutral-disabled);
+  pointer-events: none;
+}
+
 /* images */
 main img {
   max-width: 100%;
