@@ -79,38 +79,69 @@
   font-size: var(--type-heading-1);
   font-weight: 700;
   color: var(--color-white);
-  line-height: 0.84;
+  line-height: 1;
   letter-spacing: 0.76px;
   margin-top: 0;
-  margin-bottom: var(--sizing-100-16px-base);
+  margin-bottom: var(--sizing-150-24px);
 }
 
 /* Description */
-.hero .hero-slide-content p,
-.hero > div:last-child > div > p {
+.hero .hero-slide-content p:not(.button-wrapper),
+.hero > div:last-child > div > p:not(.button-wrapper) {
   color: var(--color-white);
-  font-size: var(--type-body-md);
+  font-size: var(--type-body-lg);
   line-height: 1.5;
-  margin-bottom: var(--sizing-100-16px-base);
+  padding: 5px;
+  margin-bottom: var(--sizing-150-24px);
 }
 
-/* CTA button — inverted: white bg, navy text */
-.hero a.button,
-.hero .button-container a {
-  background-color: var(--color-white);
-  color: var(--color-navy-500);
+/* CTA — tertiary style applied to the p.button-wrapper */
+.hero .button-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-gray-025);
   border: none;
   border-radius: var(--radius-rounded);
   padding: var(--sizing-075-12px) var(--sizing-150-24px);
+  cursor: pointer;
+  transition: background-color 200ms ease;
+}
+
+.hero .button-wrapper:hover {
+  background-color: var(--color-teal-050);
+}
+
+.hero .button-wrapper:active {
+  background-color: var(--color-teal-100);
+}
+
+.hero .button-wrapper:focus-within {
+  outline: var(--sizing-013-2px) solid var(--stroke-focus-brand);
+  outline-offset: var(--sizing-013-2px);
+}
+
+/* Strip button styling from the a inside — wrapper handles it */
+.hero a.button.tertiary {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  color: var(--color-navy-500);
   font-size: var(--type-body-sm-base);
   font-weight: 600;
   text-decoration: none;
 }
 
-.hero a.button:hover,
-.hero .button-container a:hover {
-  background-color: var(--color-gray-100);
-  color: var(--color-navy-600);
+.hero a.button.tertiary:hover,
+.hero a.button.tertiary:active {
+  background: none;
+  color: var(--color-navy-500);
+}
+
+.hero a.button.tertiary:focus-visible {
+  outline: none;
 }
 
 /* Desktop */
@@ -124,9 +155,9 @@
     font-size: var(--type-heading-1);
   }
 
-  .hero .hero-slide-content p,
-  .hero > div:last-child > div > p {
-    font-size: 22px;
+  .hero .hero-slide-content p:not(.button-wrapper),
+  .hero > div:last-child > div > p:not(.button-wrapper) {
+    font-size: var(--type-body-lg);
     line-height: 30px;
   }
 }
