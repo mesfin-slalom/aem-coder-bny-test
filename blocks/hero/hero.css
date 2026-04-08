@@ -76,7 +76,7 @@
 /* Heading */
 .hero h1 {
   font-family: var(--type-heading), oswald-fallback, sans-serif;
-  font-size: 48px;
+  font-size: var(--type-heading-1);
   font-weight: 700;
   color: var(--color-white);
   line-height: 0.84;
@@ -121,7 +121,7 @@
   }
 
   .hero h1 {
-    font-size: 76px;
+    font-size: var(--type-heading-1);
   }
 
   .hero .hero-slide-content p,
@@ -139,6 +139,6 @@
   }
 
   .hero h1 {
-    font-size: 60px;
+    font-size: var(--type-heading-1);
   }
 }
