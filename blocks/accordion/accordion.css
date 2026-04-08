@@ -16,6 +16,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: var(--accordion-header-gap);
   cursor: pointer;
   list-style: none;
   overflow: auto;
@@ -32,11 +33,9 @@
 }
 
 .accordion details summary:focus-visible {
-  border-radius: var(--radius-063);
-  outline: none;
-  border: var(--sizing-013-2px) solid var(--fg-neutral-primary);
-  padding: calc(var(--sizing-100-16px-base) - 2px) calc(var(--sizing-150-24px) - 2px);
-  background-color: var(--bg-neutral-primary);
+  outline: var(--sizing-013-2px) solid var(--stroke-focus-brand);
+  outline-offset: calc(-1 * var(--sizing-013-2px));
+  border: none;
 }
 
 .accordion details[open] summary {
