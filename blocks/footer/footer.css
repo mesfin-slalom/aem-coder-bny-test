@@ -63,6 +63,7 @@ footer .footer .footer-nav ul li {
 
 footer .footer .footer-nav ul li:hover {
   background-color: var(--color-teal-050);
+  cursor: pointer;
 }
 
 footer .footer .footer-nav ul li:active {
@@ -70,7 +71,7 @@ footer .footer .footer-nav ul li:active {
 }
 
 footer .footer .footer-nav ul li:focus-within {
-  border-color: var(--stroke-focus-brand);
+  outline: var(--sizing-013-2px) solid var(--stroke-focus-brand);
   border-radius: var(--radius-063);
 }
 
@@ -173,6 +174,7 @@ footer .footer .footer-social-icon {
 
 footer .footer .footer-social-icon:hover {
   background-color: var(--color-teal-050);
+  cursor: pointer;
 }
 
 footer .footer .footer-social-icon:active {
@@ -180,7 +182,7 @@ footer .footer .footer-social-icon:active {
 }
 
 footer .footer .footer-social-icon:focus-within {
-  border-color: var(--stroke-focus-brand);
+  outline: var(--sizing-013-2px) solid var(--stroke-focus-brand);
 }
 
 footer .footer .footer-social-icons a {

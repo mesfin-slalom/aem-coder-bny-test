@@ -167,8 +167,8 @@ header nav .nav-hamburger {
 header nav .nav-hamburger button {
   margin: 0;
   border: 0;
-  border-radius: 0;
-  padding: 0;
+  border-radius: var(--radius-050);
+  padding: var(--sizing-025-4px) var(--sizing-050-8px);
   background-color: transparent;
   color: inherit;
   overflow: initial;
@@ -178,6 +178,21 @@ header nav .nav-hamburger button {
   display: flex;
   align-items: center;
   cursor: pointer;
+  transition: background-color 200ms ease;
+}
+
+header nav .nav-hamburger button:hover {
+  background-color: var(--color-teal-050);
+}
+
+header nav .nav-hamburger button:active {
+  background-color: var(--color-teal-100);
+}
+
+header nav .nav-hamburger button:focus-visible {
+  outline: var(--sizing-013-2px) solid var(--stroke-focus-brand);
+  outline-offset: -2px;
+  border-radius: var(--radius-063);
 }
 
 header nav .nav-hamburger img {
@@ -782,6 +797,11 @@ header nav .nav-tools p:not(:has(.button)):active {
   background-color: var(--color-teal-100);
 }
 
+header nav .nav-tools p:not(:has(.button)):focus-within {
+  outline: var(--sizing-013-2px) solid var(--stroke-focus-brand);
+  outline-offset: -2px;
+  border-radius: var(--radius-063);
+}
 
 /* nav-tools link — styling */
 header nav .nav-tools a:any-link:not(.button) {
@@ -799,9 +819,7 @@ header nav .nav-tools a:any-link:not(.button):hover {
 }
 
 header nav .nav-tools a:any-link:not(.button):focus-visible {
-  outline: var(--sizing-013-2px) solid var(--stroke-focus-brand);
-  outline-offset: -2px;
-  border-radius: var(--radius-063);
+  outline: none;
 }
 
 header nav .nav-tools a.button.primary {
