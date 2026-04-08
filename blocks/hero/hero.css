@@ -1,37 +1,144 @@
-.hero-container .hero-wrapper {
+/* stylelint-disable no-descending-specificity */
+
+/* Hero block — BNY dark navy full-width hero with background image */
+
+/* Remove section wrapper constraints */
+.hero-container > .hero-wrapper {
   max-width: unset;
   padding: 0;
 }
 
-.hero {
-  position: relative;
-  padding: 40px 24px;
-  min-height: 300px;
+.hero-container {
+  padding: 0;
 }
 
-.hero h1 {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  color: var(--background-color);
+/* Hero block */
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 400px;
+  padding: var(--sizing-300-48px) var(--page-margin, 16px);
+  overflow: hidden;
+  color: var(--color-white);
+}
+
+/* Background image — absolute cover */
+.hero .hero-slide-image,
+.hero > div:first-child {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
 }
 
 .hero picture {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  object-fit: cover;
-  box-sizing: border-box;
+  display: block;
+  height: 100%;
+  width: 100%;
 }
 
-.hero img {
+.hero picture img {
   object-fit: cover;
   width: 100%;
   height: 100%;
+  display: block;
 }
 
-@media (width >= 900px) {
+/* Dark overlay for text readability */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--bg-brand-text-overlay);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Content — left-aligned, over image */
+.hero .hero-slide-content,
+.hero > div:last-child {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+}
+
+/* Eyebrow text */
+.hero .hero-slide-content p:first-child,
+.hero > div:last-child > div > p:first-child {
+  font-size: var(--type-body-sm-base);
+  font-family: var(--type-default), roboto-fallback, sans-serif;
+  font-weight: 400;
+  color: var(--color-white);
+  margin-bottom: var(--sizing-050-8px);
+}
+
+/* Heading */
+.hero h1 {
+  font-family: var(--type-heading), oswald-fallback, sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--color-white);
+  line-height: 0.84;
+  letter-spacing: 0.76px;
+  margin-top: 0;
+  margin-bottom: var(--sizing-100-16px-base);
+}
+
+/* Description */
+.hero .hero-slide-content p,
+.hero > div:last-child > div > p {
+  color: var(--color-white);
+  font-size: var(--type-body-md);
+  line-height: 1.5;
+  margin-bottom: var(--sizing-100-16px-base);
+}
+
+/* CTA button — inverted: white bg, navy text */
+.hero a.button,
+.hero .button-container a {
+  background-color: var(--color-white);
+  color: var(--color-navy-500);
+  border: none;
+  border-radius: var(--radius-rounded);
+  padding: var(--sizing-075-12px) var(--sizing-150-24px);
+  font-size: var(--type-body-sm-base);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.hero a.button:hover,
+.hero .button-container a:hover {
+  background-color: var(--color-gray-100);
+  color: var(--color-navy-600);
+}
+
+/* Desktop */
+@media (width > 1024px) {
   .hero {
-    padding: 40px 32px;
+    min-height: 620px;
+    padding: var(--sizing-600-96px) var(--sizing-300-48px);
+  }
+
+  .hero h1 {
+    font-size: 76px;
+  }
+
+  .hero .hero-slide-content p,
+  .hero > div:last-child > div > p {
+    font-size: 22px;
+    line-height: 30px;
+  }
+}
+
+/* Tablet */
+@media (700px <= width <= 1024px) {
+  .hero {
+    min-height: 500px;
+    padding: var(--sizing-300-48px) var(--sizing-200-32px);
+  }
+
+  .hero h1 {
+    font-size: 60px;
   }
 }
