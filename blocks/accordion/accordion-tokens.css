@@ -1,7 +1,7 @@
 /* Accordion component tokens — references site-wide Figma design system.
    Only block-specific overrides that differ from global styles. */
 
-.accortion {
+.accordion {
   /* header spacing */
   --accordion-header-padding-x: var(--sizing-150-24px);
   --accordion-header-padding-y: var(--sizing-100-16px-base);
