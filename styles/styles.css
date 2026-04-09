@@ -1193,8 +1193,6 @@ p:has(> a.button.tertiary):hover > a.button.tertiary {
 a.button.tertiary:active,
 button.button.tertiary:active,
 p:has(> a.button.tertiary):active > a.button.tertiary {
-  background-color: var(--color-teal-100);
-  border: none;
   background-color: var(--bg-neutral-tertiary);
   color: var(--fg-neutral-primary);
   border: none;
