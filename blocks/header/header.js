@@ -331,7 +331,7 @@ export default async function decorate(block) {
       <img class="nav-hamburger-close" src="/icons/x.svg" alt="" width="24" height="24">
     </button>`;
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
-  nav.prepend(hamburger);
+  nav.append(hamburger);
   nav.setAttribute('aria-expanded', 'false');
   // prevent mobile nav behavior on window resize
   toggleMenu(nav, navSections, isDesktop.matches);

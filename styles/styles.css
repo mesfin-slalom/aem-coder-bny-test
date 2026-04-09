@@ -1195,18 +1195,30 @@ button.button.tertiary:active,
 p:has(> a.button.tertiary):active > a.button.tertiary {
   background-color: var(--color-teal-100);
   border: none;
+  background-color: var(--bg-neutral-tertiary);
+  color: var(--fg-neutral-primary);
+  border: none;
+}
+
+a.button.tertiary:hover,
+button.button.tertiary:hover {
+  background-color: var(--bg-neutral-hover);
+}
+
+a.button.tertiary:active,
+button.button.tertiary:active {
+  background-color: var(--bg-neutral-active);
 }
 
 a.button.tertiary:focus-visible,
 button.button.tertiary:focus-visible {
   outline: var(--sizing-013-2px) solid var(--stroke-focus-brand);
-  outline-offset: var(--sizing-025-4px);
+  outline-offset: var(--sizing-013-2px);
 }
 
 a.button.tertiary.button-disabled,
 a.button.tertiary.button-disabled:hover {
-  background-color: var(--color-white);
-  border: none;
+  background-color: var(--bg-neutral-disabled);
   color: var(--fg-neutral-disabled);
   pointer-events: none;
 }
