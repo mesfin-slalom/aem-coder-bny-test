@@ -97,7 +97,7 @@ function buildMegaMenu(navDrop) {
   teasersWrapper.className = 'mega-menu-teasers';
 
   [...subUl.children].forEach((li) => {
-    if (li.classList.contains('mega-menu-teaser')) {
+    if (li.classList.contains('mega-menu-teaser') || li.querySelector('picture')) {
       // Build teaser card
       const teaser = document.createElement('div');
       teaser.className = 'mega-menu-teaser-card';
