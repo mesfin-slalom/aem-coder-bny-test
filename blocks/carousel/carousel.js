@@ -147,12 +147,13 @@ function bindEvents(block) {
   // Use scroll events on the slides container to track position
   const slidesContainer = block.querySelector('.carousel-slides');
   let scrollTimeout;
+  let isDragging = false;
   slidesContainer.addEventListener('scroll', () => {
-    // Always update slider bar position during scroll
-    updateSliderBar(block);
+    // Always update slider bar position during scroll (unless user is dragging the bar)
+    if (!isDragging) updateSliderBar(block);
 
-    // Debounce active slide detection (skip during button navigation)
-    if (isNavigating) return;
+    // Debounce active slide detection (skip during button navigation or dragging)
+    if (isNavigating || isDragging) return;
     clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(() => {
       const slides = block.querySelectorAll('.carousel-slide');
@@ -168,6 +169,76 @@ function bindEvents(block) {
       });
       updateActiveSlide(closestSlide);
     }, 100);
+  });
+
+  // Draggable slider bar (mouse + touch)
+  const slider = block.querySelector('.carousel-slider');
+  const sliderBar = block.querySelector('.carousel-slider-bar');
+  if (!slider || !sliderBar) return;
+
+  let dragStartX = 0;
+  let dragSlideIndex = 0;
+  let dragSnapped = false;
+  const DRAG_THRESHOLD = 10;
+
+  const getPointerX = (e) => (e.touches ? e.touches[0].clientX : e.clientX);
+
+  const onDragMove = (e) => {
+    if (!isDragging || dragSnapped) return;
+    e.preventDefault();
+    const deltaX = getPointerX(e) - dragStartX;
+
+    if (Math.abs(deltaX) >= DRAG_THRESHOLD) {
+      dragSnapped = true;
+      // Stop suppressing slider bar updates so the snap animates the bar
+      isDragging = false;
+      const nextIndex = deltaX > 0 ? dragSlideIndex + 1 : dragSlideIndex - 1;
+      showSlide(block, nextIndex);
+    }
+  };
+
+  const onDragEnd = () => {
+    isDragging = false;
+    dragSnapped = false;
+    sliderBar.style.cursor = '';
+    document.body.style.userSelect = '';
+
+    document.removeEventListener('mousemove', onDragMove);
+    document.removeEventListener('mouseup', onDragEnd);
+    document.removeEventListener('touchmove', onDragMove);
+    document.removeEventListener('touchend', onDragEnd);
+  };
+
+  const onDragStart = (e) => {
+    isDragging = true;
+    dragSnapped = false;
+    dragStartX = getPointerX(e);
+    dragSlideIndex = getActiveSlideIndex(block);
+    sliderBar.style.cursor = 'grabbing';
+    document.body.style.userSelect = 'none';
+
+    document.addEventListener('mousemove', onDragMove);
+    document.addEventListener('mouseup', onDragEnd);
+    document.addEventListener('touchmove', onDragMove, { passive: false });
+    document.addEventListener('touchend', onDragEnd);
+  };
+
+  sliderBar.addEventListener('mousedown', onDragStart);
+  sliderBar.addEventListener('touchstart', onDragStart, { passive: true });
+
+  // Click on slider track to jump forward/backward
+  slider.addEventListener('click', (e) => {
+    if (e.target === sliderBar || isDragging) return;
+    const sliderRect = slider.getBoundingClientRect();
+    const clickX = e.clientX - sliderRect.left;
+    const barCenter = parseFloat(sliderBar.style.left || 0) + (sliderBar.offsetWidth / 2);
+    const currentIndex = getActiveSlideIndex(block);
+
+    if (clickX > barCenter) {
+      showSlide(block, currentIndex + 1);
+    } else {
+      showSlide(block, currentIndex - 1);
+    }
   });
 }
 
