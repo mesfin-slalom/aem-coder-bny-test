@@ -96,6 +96,8 @@
 
 /* Description */
 .teaser .teaser-description {
+  display: flex;
+  gap: var(--sizing-150-24px);
   font-family: var(--type-default), roboto-fallback, sans-serif;
   font-size: var(--type-body-lg);
   font-weight: 400;
@@ -240,7 +242,7 @@
   min-height: 432px;
   padding: var(--sizing-300-48px);
   width: 100%;
-  background-color: var(--bg-brand-text-overlay);
+  background-color: var(--bg-brand-text-overlay-dark);
 }
 
 .teaser.hero .teaser-content > * {
@@ -462,7 +464,7 @@
 }
 
 /* Text Overlay variant — dark card with bg image, text at top, icon button at bottom-right */
-.teaser.text-overlay {
+.teaser.text-overlay-dark {
   position: relative;
   padding: var(--sizing-250-40px);
   border-radius: var(--radius-075);
@@ -471,24 +473,119 @@
   justify-content: space-between;
 }
 
-.teaser.text-overlay .teaser-image {
+.teaser.text-overlay-dark .teaser-image {
   position: absolute;
   inset: 0;
   z-index: 0;
   border-radius: var(--radius-075);
 }
 
-.teaser.text-overlay .teaser-image picture,
-.teaser.text-overlay .teaser-image picture img {
+.teaser.text-overlay-dark .teaser-image picture,
+.teaser.text-overlay-dark .teaser-image picture img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: var(--radius-075);
 }
 
-.teaser.text-overlay .teaser-content {
+.teaser.text-overlay-dark .teaser-content {
   position: relative;
   z-index: 1;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.teaser.text-overlay-dark .teaser-title {
+  gap: var(--sizing-150-24px);
+}
+
+.teaser.text-overlay-dark .teaser-title h1,
+.teaser.text-overlay-dark .teaser-title h2,
+.teaser.text-overlay-dark .teaser-title h3,
+.teaser.text-overlay-dark .teaser-title h4,
+.teaser.text-overlay-dark .teaser-title h5,
+.teaser.text-overlay-dark .teaser-title h6 {
+  font-size: var(--sizing-225-36px);
+  line-height: 1;
+}
+
+.teaser.text-overlay-dark .teaser-title p {
+  font-size: var(--type-body-sm-base);
+  line-height: 1.5;
+}
+
+.teaser.text-overlay-dark .teaser-pretitle,
+.teaser.text-overlay-dark .teaser-title h1,
+.teaser.text-overlay-dark .teaser-title h2,
+.teaser.text-overlay-dark .teaser-title h3,
+.teaser.text-overlay-dark .teaser-title h4,
+.teaser.text-overlay-dark .teaser-title h5,
+.teaser.text-overlay-dark .teaser-title h6,
+.teaser.text-overlay-dark .teaser-title p,
+.teaser.text-overlay-dark .teaser-description,
+.teaser.text-overlay-dark .teaser-description p {
+  color: var(--color-white);
+}
+
+.teaser.text-overlay-dark .teaser-caption {
+  display: none;
+}
+
+.teaser.text-overlay-dark .teaser-buttons {
+  align-self: flex-end;
+}
+
+.teaser.text-overlay-dark .teaser-buttons .button-wrapper {
+  margin: 0;
+}
+
+.teaser.text-overlay-dark .teaser-buttons a.button.tertiary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--sizing-300-48px);
+  height: var(--sizing-300-48px);
+  min-width: unset;
+  padding: 0;
+  border-radius: 50%;
+  background-color: var(--bg-neutral-primary);
+  border-color: var(--bg-neutral-primary);
+}
+
+.teaser.text-overlay-dark .teaser-buttons a.button.tertiary:hover {
+  background-color: var(--color-gray-050);
+  border-color: var(--color-gray-050);
+}
+
+.teaser.text-overlay-dark .teaser-buttons a.button .icon-arrow-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--components-icon-button-large);
+  height: var(--components-icon-button-large);
+  margin-right: 0;
+}
+
+.teaser.text-overlay-dark .teaser-buttons a.button .icon-arrow-right img {
+  width: var(--components-icon-button-large);
+  height: var(--components-icon-button-large);
+  object-fit: contain;
+}
+
+/* Text Overlay variant — white card, dark text, icon button at bottom-right */
+.teaser.text-overlay {
+  padding: var(--sizing-250-40px);
+  border-radius: var(--radius-075);
+  background-color: var(--color-white);
+  min-height: 440px;
+  justify-content: space-between;
+}
+
+.teaser.text-overlay .teaser-image {
+  display: none;
+}
+
+.teaser.text-overlay .teaser-content {
   justify-content: space-between;
   flex: 1;
 }
@@ -497,17 +594,30 @@
   gap: var(--sizing-150-24px);
 }
 
-.teaser.text-overlay .teaser-pretitle,
 .teaser.text-overlay .teaser-title h1,
 .teaser.text-overlay .teaser-title h2,
 .teaser.text-overlay .teaser-title h3,
 .teaser.text-overlay .teaser-title h4,
 .teaser.text-overlay .teaser-title h5,
-.teaser.text-overlay .teaser-title h6,
-.teaser.text-overlay .teaser-title p,
+.teaser.text-overlay .teaser-title h6 {
+  font-size: var(--sizing-225-36px);
+  line-height: 1;
+  color: var(--fg-neutral-primary);
+}
+
+.teaser.text-overlay .teaser-title p {
+  font-size: var(--type-body-sm-base);
+  line-height: 1.5;
+  color: var(--fg-neutral-primary);
+}
+
+.teaser.text-overlay .teaser-pretitle {
+  color: var(--fg-neutral-secondary);
+}
+
 .teaser.text-overlay .teaser-description,
 .teaser.text-overlay .teaser-description p {
-  color: var(--color-white);
+  color: var(--fg-neutral-primary);
 }
 
 .teaser.text-overlay .teaser-caption {
@@ -518,20 +628,42 @@
   align-self: flex-end;
 }
 
+.teaser.text-overlay .teaser-buttons .button-wrapper {
+  margin: 0;
+}
+
 .teaser.text-overlay .teaser-buttons a.button.primary {
-  width: var(--sizing-250-40px);
-  height: var(--sizing-250-40px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--sizing-300-48px);
+  height: var(--sizing-300-48px);
   min-width: unset;
   padding: 0;
   border-radius: 50%;
-  background-color: var(--color-white);
-  border-color: var(--color-white);
-  color: var(--fg-brand-main);
+  background-color: var(--bg-brand-main);
+  border-color: var(--bg-brand-main);
 }
 
 .teaser.text-overlay .teaser-buttons a.button.primary:hover {
-  background-color: var(--color-gray-050);
-  border-color: var(--color-gray-050);
+  background-color: var(--bg-brand-hover);
+  border-color: var(--bg-brand-hover);
+}
+
+.teaser.text-overlay .teaser-buttons a.button .icon-arrow-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--components-icon-button-large);
+  height: var(--components-icon-button-large);
+  margin-right: 0;
+}
+
+.teaser.text-overlay .teaser-buttons a.button .icon-arrow-right img {
+  width: var(--components-icon-button-large);
+  height: var(--components-icon-button-large);
+  object-fit: contain;
+  filter: brightness(0) invert(1);
 }
 
 /* Mobile adjustments */
@@ -610,8 +742,13 @@
     padding: 0 var(--sizing-100-16px-base);
   }
 
-  .teaser.text-overlay {
+  .teaser.text-overlay-dark {
     min-height: 400px;
+    padding: var(--sizing-150-24px);
+  }
+
+  .teaser.text-overlay {
+    min-height: 320px;
     padding: var(--sizing-150-24px);
   }
 }

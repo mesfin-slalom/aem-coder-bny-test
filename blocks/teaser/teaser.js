@@ -1,3 +1,5 @@
+import { decorateIcons } from '../../scripts/aem.js';
+
 /**
  * Decorates the teaser block.
  * @param {Element} block The teaser block element
@@ -95,4 +97,18 @@ export default function decorate(block) {
   });
 
   block.append(contentWrapper);
+
+  // Text Overlay variants: replace button text with arrow-right icon
+  if (block.classList.contains('text-overlay-dark') || block.classList.contains('text-overlay')) {
+    const btnClass = block.classList.contains('text-overlay') ? 'primary' : 'tertiary';
+    contentWrapper.querySelectorAll('.teaser-buttons a.button').forEach((a) => {
+      a.classList.remove('primary', 'secondary', 'accent', 'tertiary');
+      a.classList.add(btnClass);
+      a.textContent = '';
+      const icon = document.createElement('span');
+      icon.className = 'icon icon-arrow-right';
+      a.append(icon);
+    });
+    decorateIcons(contentWrapper);
+  }
 }
