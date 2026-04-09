@@ -4,18 +4,23 @@ import { decorateIcons } from '../../scripts/aem.js';
 const AUTOPLAY_INTERVAL = 5000;
 
 function updateSliderBar(block) {
-  const slides = block.querySelectorAll('.carousel-slide');
+  const slidesContainer = block.querySelector('.carousel-slides');
   const slider = block.querySelector('.carousel-slider');
   const sliderBar = block.querySelector('.carousel-slider-bar');
-  if (!sliderBar || !slider || slides.length === 0) return;
+  if (!sliderBar || !slider || !slidesContainer) return;
 
-  const currentIndex = parseInt(block.dataset.activeSlide, 10) || 0;
-  const totalSlides = slides.length;
+  const maxScroll = slidesContainer.scrollWidth - slidesContainer.clientWidth;
   const sliderWidth = slider.offsetWidth;
   const barWidth = sliderBar.offsetWidth;
   const maxLeft = sliderWidth - barWidth;
-  const left = totalSlides <= 1 ? 0 : (currentIndex / (totalSlides - 1)) * maxLeft;
 
+  if (maxScroll <= 0) {
+    sliderBar.style.left = '0px';
+    return;
+  }
+
+  const scrollRatio = slidesContainer.scrollLeft / maxScroll;
+  const left = scrollRatio * maxLeft;
   sliderBar.style.left = `${left}px`;
 }
 
@@ -35,16 +40,31 @@ function updateActiveSlide(slide) {
       }
     });
   });
-
-  updateSliderBar(block);
 }
 
 function showSlide(block, slideIndex = 0) {
   const slides = block.querySelectorAll('.carousel-slide');
-  let realSlideIndex = slideIndex < 0 ? slides.length - 1 : slideIndex;
-  if (slideIndex >= slides.length) realSlideIndex = 0;
-  const activeSlide = slides[realSlideIndex];
+  const slidesContainer = block.querySelector('.carousel-slides');
+  const maxScroll = slidesContainer.scrollWidth - slidesContainer.clientWidth;
+  const currentScroll = Math.round(slidesContainer.scrollLeft);
 
+  let realSlideIndex = slideIndex;
+
+  // Wrap around
+  if (slideIndex >= slides.length) realSlideIndex = 0;
+  if (slideIndex < 0) realSlideIndex = slides.length - 1;
+
+  // If at scroll end and advancing forward, wrap to start
+  if (currentScroll >= maxScroll - 2 && slideIndex >= slides.length) {
+    realSlideIndex = 0;
+  }
+
+  // If at scroll start and going backward, wrap to end
+  if (currentScroll <= 2 && slideIndex < 0) {
+    realSlideIndex = slides.length - 1;
+  }
+
+  const activeSlide = slides[realSlideIndex];
   block.dataset.activeSlide = realSlideIndex;
 
   slides.forEach((s, idx) => {
@@ -58,13 +78,18 @@ function showSlide(block, slideIndex = 0) {
     });
   });
 
-  block.querySelector('.carousel-slides').scrollTo({
+  const targetScroll = activeSlide.offsetLeft;
+
+  slidesContainer.scrollTo({
     top: 0,
-    left: activeSlide.offsetLeft,
+    left: targetScroll,
     behavior: 'smooth',
   });
 
-  updateSliderBar(block);
+  // If scroll won't change, manually update slider bar
+  if (Math.abs(targetScroll - currentScroll) < 2) {
+    updateSliderBar(block);
+  }
 }
 
 function getActiveSlideIndex(block) {
@@ -91,24 +116,62 @@ function pauseAutoplay(block) {
 }
 
 function bindEvents(block) {
+  let isNavigating = false;
+
   block.querySelector('.slide-prev').addEventListener('click', () => {
-    showSlide(block, getActiveSlideIndex(block) - 1);
+    isNavigating = true;
+    const slidesContainer = block.querySelector('.carousel-slides');
+    const currentScroll = Math.round(slidesContainer.scrollLeft);
+    // If at the start, wrap to end; otherwise go to previous slide
+    if (currentScroll <= 2) {
+      showSlide(block, -1);
+    } else {
+      showSlide(block, getActiveSlideIndex(block) - 1);
+    }
+    setTimeout(() => { isNavigating = false; }, 600);
   });
   block.querySelector('.slide-next').addEventListener('click', () => {
-    showSlide(block, getActiveSlideIndex(block) + 1);
+    isNavigating = true;
+    const slidesContainer = block.querySelector('.carousel-slides');
+    const maxScroll = slidesContainer.scrollWidth - slidesContainer.clientWidth;
+    const currentScroll = Math.round(slidesContainer.scrollLeft);
+    // If at the end, wrap to start; otherwise go to next slide
+    if (currentScroll >= maxScroll - 2) {
+      showSlide(block, block.querySelectorAll('.carousel-slide').length);
+    } else {
+      showSlide(block, getActiveSlideIndex(block) + 1);
+    }
+    setTimeout(() => { isNavigating = false; }, 600);
   });
 
-  const slideObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) updateActiveSlide(entry.target);
-    });
-  }, { threshold: 0.5 });
-  block.querySelectorAll('.carousel-slide').forEach((slide) => {
-    slideObserver.observe(slide);
+  // Use scroll events on the slides container to track position
+  const slidesContainer = block.querySelector('.carousel-slides');
+  let scrollTimeout;
+  slidesContainer.addEventListener('scroll', () => {
+    // Always update slider bar position during scroll
+    updateSliderBar(block);
+
+    // Debounce active slide detection (skip during button navigation)
+    if (isNavigating) return;
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      const slides = block.querySelectorAll('.carousel-slide');
+      const { scrollLeft } = slidesContainer;
+      let [closestSlide] = slides;
+      let closestDistance = Infinity;
+      slides.forEach((slide) => {
+        const distance = Math.abs(slide.offsetLeft - scrollLeft);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestSlide = slide;
+        }
+      });
+      updateActiveSlide(closestSlide);
+    }, 100);
   });
 }
 
-function createSlide(row, slideIndex, carouselId) {
+function createSlide(row, slideIndex, carouselId, block) {
   const slide = document.createElement('li');
   slide.dataset.slideIndex = slideIndex;
   slide.setAttribute('id', `carousel-${carouselId}-slide-${slideIndex}`);
@@ -119,9 +182,9 @@ function createSlide(row, slideIndex, carouselId) {
     slide.append(column);
   });
 
-  // Add arrow-right icon button at bottom of content
+  // Add arrow-right icon button at bottom of content (teaser-overlay only)
   const contentDiv = slide.querySelector('.carousel-slide-content');
-  if (contentDiv) {
+  if (contentDiv && block.classList.contains('teaser-overlay')) {
     const arrowWrapper = document.createElement('div');
     arrowWrapper.classList.add('carousel-slide-arrow');
     const arrowBtn = document.createElement('button');
@@ -191,19 +254,15 @@ export default async function decorate(block) {
   }
 
   rows.forEach((row, idx) => {
-    const slide = createSlide(row, idx, carouselId);
+    const slide = createSlide(row, idx, carouselId, block);
     slidesWrapper.append(slide);
     row.remove();
   });
 
   container.append(slidesWrapper);
 
-  // Add gradient overlays
+  // Add gradient overlay (right edge only)
   if (!isSingleSlide) {
-    const gradientLeft = document.createElement('div');
-    gradientLeft.classList.add('carousel-gradient-left');
-    container.append(gradientLeft);
-
     const gradientRight = document.createElement('div');
     gradientRight.classList.add('carousel-gradient-right');
     container.append(gradientRight);
