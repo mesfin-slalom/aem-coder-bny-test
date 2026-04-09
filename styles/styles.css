@@ -926,13 +926,13 @@ button.button {
   border-radius: var(--radius-rounded);
   color: var(--fg-brand-main);
   display: inline-flex;
-  font-weight: 700;
+  font-weight: 600;
   font-size: var(--type-button-sm);
   letter-spacing: 0.32px;
   line-height: 1.5;
   gap: var(--sizing-050-8px);
   justify-content: center;
-  min-width: 3rem;
+  min-width: var(--sizing-300-48px);
   max-width: var(--components-button-max-width);
   overflow: hidden;
   padding: var(--sizing-050-8px) var(--sizing-100-16px-base);
@@ -947,6 +947,7 @@ a.button:any-link .icon,
 button .icon {
   width: var(--sizing-125-20px, 20px);
   height: var(--sizing-125-20px, 20px);
+  flex-shrink: 0;
 }
 
 a.button[title=""]:has(span.icon),
@@ -1042,6 +1043,7 @@ a.button[title=""].button-disabled:has(span.icon) {
     font-size: var(--type-button-lg);
     letter-spacing: 0.48px;
     padding: var(--sizing-075-12px) var(--sizing-150-24px);
+    min-width: 120px;
   }
 
   a.button:any-link .icon,
@@ -1054,6 +1056,7 @@ a.button[title=""].button-disabled:has(span.icon) {
   button.button[title=""]:has(span.icon) {
     width: var(--sizing-300-48px);
     height: var(--sizing-300-48px);
+    min-width: unset;
   }
 }
 
