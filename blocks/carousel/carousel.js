@@ -15,10 +15,18 @@ function updateSliderBar(block) {
   const maxLeft = sliderWidth - barWidth;
 
   if (maxScroll <= 0) {
-    sliderBar.style.left = '0px';
+    // All slides visible — animate bar based on active slide index
+    const slides = block.querySelectorAll('.carousel-slide');
+    const currentIndex = parseInt(block.dataset.activeSlide, 10) || 0;
+    const totalSlides = slides.length;
+    const left = totalSlides <= 1 ? 0 : (currentIndex / (totalSlides - 1)) * maxLeft;
+    sliderBar.style.transition = 'left 0.3s ease';
+    sliderBar.style.left = `${left}px`;
     return;
   }
 
+  // Scroll-driven — no transition, update directly each frame
+  sliderBar.style.transition = 'none';
   const scrollRatio = slidesContainer.scrollLeft / maxScroll;
   const left = scrollRatio * maxLeft;
   sliderBar.style.left = `${left}px`;
@@ -80,15 +88,16 @@ function showSlide(block, slideIndex = 0) {
 
   const targetScroll = activeSlide.offsetLeft;
 
-  slidesContainer.scrollTo({
-    top: 0,
-    left: targetScroll,
-    behavior: 'smooth',
-  });
-
-  // If scroll won't change, manually update slider bar
-  if (Math.abs(targetScroll - currentScroll) < 2) {
+  // If all slides are visible (no scrollable overflow) or scroll won't change,
+  // manually update slider bar since no scroll event will fire
+  if (maxScroll <= 0 || Math.abs(targetScroll - currentScroll) < 2) {
     updateSliderBar(block);
+  } else {
+    slidesContainer.scrollTo({
+      top: 0,
+      left: targetScroll,
+      behavior: 'smooth',
+    });
   }
 }
 
@@ -120,39 +129,25 @@ function bindEvents(block) {
 
   block.querySelector('.slide-prev').addEventListener('click', () => {
     isNavigating = true;
-    const slidesContainer = block.querySelector('.carousel-slides');
-    const currentScroll = Math.round(slidesContainer.scrollLeft);
-    // If at the start, wrap to end; otherwise go to previous slide
-    if (currentScroll <= 2) {
-      showSlide(block, -1);
-    } else {
-      showSlide(block, getActiveSlideIndex(block) - 1);
-    }
+    showSlide(block, getActiveSlideIndex(block) - 1);
     setTimeout(() => { isNavigating = false; }, 600);
   });
   block.querySelector('.slide-next').addEventListener('click', () => {
     isNavigating = true;
-    const slidesContainer = block.querySelector('.carousel-slides');
-    const maxScroll = slidesContainer.scrollWidth - slidesContainer.clientWidth;
-    const currentScroll = Math.round(slidesContainer.scrollLeft);
-    // If at the end, wrap to start; otherwise go to next slide
-    if (currentScroll >= maxScroll - 2) {
-      showSlide(block, block.querySelectorAll('.carousel-slide').length);
-    } else {
-      showSlide(block, getActiveSlideIndex(block) + 1);
-    }
+    showSlide(block, getActiveSlideIndex(block) + 1);
     setTimeout(() => { isNavigating = false; }, 600);
   });
 
   // Use scroll events on the slides container to track position
   const slidesContainer = block.querySelector('.carousel-slides');
   let scrollTimeout;
+  let isDragging = false;
   slidesContainer.addEventListener('scroll', () => {
-    // Always update slider bar position during scroll
-    updateSliderBar(block);
+    // Always update slider bar position during scroll (unless user is dragging the bar)
+    if (!isDragging) updateSliderBar(block);
 
-    // Debounce active slide detection (skip during button navigation)
-    if (isNavigating) return;
+    // Debounce active slide detection (skip during button navigation or dragging)
+    if (isNavigating || isDragging) return;
     clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(() => {
       const slides = block.querySelectorAll('.carousel-slide');
@@ -168,6 +163,76 @@ function bindEvents(block) {
       });
       updateActiveSlide(closestSlide);
     }, 100);
+  });
+
+  // Draggable slider bar (mouse + touch)
+  const slider = block.querySelector('.carousel-slider');
+  const sliderBar = block.querySelector('.carousel-slider-bar');
+  if (!slider || !sliderBar) return;
+
+  let dragStartX = 0;
+  let dragSlideIndex = 0;
+  let dragSnapped = false;
+  const DRAG_THRESHOLD = 10;
+
+  const getPointerX = (e) => (e.touches ? e.touches[0].clientX : e.clientX);
+
+  const onDragMove = (e) => {
+    if (!isDragging || dragSnapped) return;
+    e.preventDefault();
+    const deltaX = getPointerX(e) - dragStartX;
+
+    if (Math.abs(deltaX) >= DRAG_THRESHOLD) {
+      dragSnapped = true;
+      // Stop suppressing slider bar updates so the snap animates the bar
+      isDragging = false;
+      const nextIndex = deltaX > 0 ? dragSlideIndex + 1 : dragSlideIndex - 1;
+      showSlide(block, nextIndex);
+    }
+  };
+
+  const onDragEnd = () => {
+    isDragging = false;
+    dragSnapped = false;
+    sliderBar.style.cursor = '';
+    document.body.style.userSelect = '';
+
+    document.removeEventListener('mousemove', onDragMove);
+    document.removeEventListener('mouseup', onDragEnd);
+    document.removeEventListener('touchmove', onDragMove);
+    document.removeEventListener('touchend', onDragEnd);
+  };
+
+  const onDragStart = (e) => {
+    isDragging = true;
+    dragSnapped = false;
+    dragStartX = getPointerX(e);
+    dragSlideIndex = getActiveSlideIndex(block);
+    sliderBar.style.cursor = 'grabbing';
+    document.body.style.userSelect = 'none';
+
+    document.addEventListener('mousemove', onDragMove);
+    document.addEventListener('mouseup', onDragEnd);
+    document.addEventListener('touchmove', onDragMove, { passive: false });
+    document.addEventListener('touchend', onDragEnd);
+  };
+
+  sliderBar.addEventListener('mousedown', onDragStart);
+  sliderBar.addEventListener('touchstart', onDragStart, { passive: true });
+
+  // Click on slider track to jump forward/backward
+  slider.addEventListener('click', (e) => {
+    if (e.target === sliderBar || isDragging) return;
+    const sliderRect = slider.getBoundingClientRect();
+    const clickX = e.clientX - sliderRect.left;
+    const barCenter = parseFloat(sliderBar.style.left || 0) + (sliderBar.offsetWidth / 2);
+    const currentIndex = getActiveSlideIndex(block);
+
+    if (clickX > barCenter) {
+      showSlide(block, currentIndex + 1);
+    } else {
+      showSlide(block, currentIndex - 1);
+    }
   });
 }
 
