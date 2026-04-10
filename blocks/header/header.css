@@ -1,10 +1,16 @@
 /* stylelint-disable no-descending-specificity */
 
-/* header and nav layout */
+/* header and nav layout — reset theme variables to light theme to prevent
+   dark-navy section overrides from leaking into the nav */
 header .nav-wrapper {
-  background-color: var(--bg-neutral-primary);
+  --fg-neutral-primary: var(--color-navy-700);
+  --fg-neutral-secondary: var(--color-teal-600);
+  --bg-neutral-primary: var(--color-white);
+
+  background-color: var(--color-white);
+  color: var(--color-navy-700);
   width: 100%;
-  z-index: 2;
+  z-index: 10;
   position: fixed;
   border-bottom: var(--sizing-006-1px) solid var(--color-gray-100);
   box-shadow: 0 4px 8px -4px rgb(1 7 12 / 4%);
