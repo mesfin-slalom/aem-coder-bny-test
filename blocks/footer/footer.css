@@ -144,13 +144,12 @@ footer .footer .footer-nav .button-wrapper .button:focus {
 }
 
 /* Footer Social & Legal Section */
-footer .footer .footer-social-legal > div {
-  padding: var(--sizing-300-48px) var(--page-margin);
-  max-width: var(--breakpoint-desktop-wide);
-  margin: 0 auto;
+footer .footer .footer-social-legal {
   display: flex;
   flex-direction: column;
   gap: var(--sizing-050-8px);
+  max-width: var(--breakpoint-desktop-wide);
+  margin: 0 auto;
 }
 
 footer .footer .footer-social-icons {

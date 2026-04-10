@@ -45,11 +45,8 @@ function decorateFooterMenu(section) {
  * @param {Element} section The footer social & legal section element
  */
 function decorateFooterSocial(section) {
-  const wrapper = section.querySelector(':scope > div');
-  if (!wrapper) return;
-
   // Find the paragraph containing social icon links
-  const socialIcons = wrapper.querySelector('p:has(.icon)');
+  const socialIcons = section.querySelector('p:has(.icon)');
   if (socialIcons) {
     socialIcons.classList.add('footer-social-icons');
     // Wrap each social link in a container for hover/active/focus styling
@@ -59,6 +56,13 @@ function decorateFooterSocial(section) {
       link.before(container);
       container.append(link);
     });
+  }
+
+  // Find the legal text paragraph (last paragraph without icons)
+  const allParagraphs = section.querySelectorAll('p:not(.footer-social-icons)');
+  if (allParagraphs.length > 0) {
+    const legalP = allParagraphs[allParagraphs.length - 1];
+    legalP.classList.add('footer-legal');
   }
 }
 
