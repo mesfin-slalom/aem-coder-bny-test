@@ -271,22 +271,38 @@ export default async function decorate(block) {
         navSection.classList.add('nav-drop');
         buildMegaMenu(navSection);
       }
-      // Wrap the bare text node in a header div for mobile accordion layout + states
+      // Wrap the nav label in a header div for mobile accordion layout
       const { firstChild } = navSection;
-      if (firstChild && firstChild.nodeType === Node.TEXT_NODE && firstChild.textContent.trim()) {
+      let labelText = '';
+      let labelNode = null;
+
+      if (firstChild && firstChild.nodeType === Node.TEXT_NODE
+        && firstChild.textContent.trim()) {
+        // Local/static: bare text node
+        labelText = firstChild.textContent.trim();
+        labelNode = firstChild;
+      } else if (firstChild && firstChild.tagName === 'P'
+        && !firstChild.querySelector('ul')) {
+        // CMS pipeline: text wrapped in <p>
+        labelText = firstChild.textContent.trim();
+        labelNode = firstChild;
+      }
+
+      if (labelText && labelNode) {
         const header = document.createElement('div');
         header.className = 'nav-drop-header';
         header.setAttribute('role', 'button');
         header.setAttribute('tabindex', '0');
         const label = document.createElement('span');
         label.className = 'nav-drop-label';
-        label.textContent = firstChild.textContent.trim();
+        label.textContent = labelText;
         header.append(label);
         const chevron = document.createElement('span');
         chevron.className = 'nav-drop-chevron';
-        chevron.innerHTML = '<img src="/icons/chevron-down.svg" alt="" width="20" height="20">';
+        chevron.innerHTML = '<img src="/icons/chevron-down.svg"'
+          + ' alt="" width="20" height="20">';
         header.append(chevron);
-        navSection.replaceChild(header, firstChild);
+        navSection.replaceChild(header, labelNode);
       }
       navSection.addEventListener('click', (e) => {
         if (isDesktop.matches) {
