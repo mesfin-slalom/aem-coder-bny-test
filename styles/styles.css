@@ -415,6 +415,9 @@
 
 /* === DARK THEME MODES === */
 .dark-navy {
+  background-color: var(--color-navy-500);
+  color: var(--color-white);
+
   --fg-neutral-primary: var(--color-white);
   --fg-neutral-secondary: var(--color-gray-050);
   --fg-neutral-tertiary: var(--color-gray-100);
@@ -467,6 +470,9 @@
 }
 
 .dark-teal {
+  background-color: var(--color-teal-800);
+  color: var(--color-white);
+
   --fg-neutral-primary: var(--color-white);
   --fg-neutral-secondary: var(--color-gray-050);
   --fg-neutral-tertiary: var(--color-gray-100);
@@ -933,7 +939,6 @@ button.button {
   gap: var(--sizing-050-8px);
   justify-content: center;
   min-width: var(--sizing-300-48px);
-  max-width: var(--components-button-max-width);
   overflow: hidden;
   padding: var(--sizing-050-8px) var(--sizing-100-16px-base);
   text-decoration: none;
@@ -1420,6 +1425,10 @@ main>.section.no-padding>div {
   padding: 0;
 }
 
+main>.section.no-top-padding {
+  padding-top: 0;
+}
+
 main>.section:first-of-type {
   margin-top: 0;
 }
@@ -1518,6 +1527,22 @@ h6 a:focus {
   color: var(--fg-brand-main);
   outline: var(--sizing-013-2px) solid var(--stroke-focus-brand);
   border-radius: var(--radius-063);
+}
+
+/* color-secondary style variant — applies to any block */
+.color-secondary h1,
+.color-secondary h2,
+.color-secondary h3,
+.color-secondary h4,
+.color-secondary h5,
+.color-secondary h6 {
+  color: var(--fg-neutral-secondary);
+}
+
+/* pretitle-secondary style variant — applies to any block
+   targets p elements before headings and teaser pretitle elements */
+.pretitle-secondary p:has(~ h1, ~ h2, ~ h3, ~ h4, ~ h5, ~ h6) {
+  color: var(--fg-neutral-secondary);
 }
 
 p,
