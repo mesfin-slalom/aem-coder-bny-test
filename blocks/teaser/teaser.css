@@ -63,6 +63,23 @@
   margin: 0;
 }
 
+.teaser.pretitle-secondary .teaser-pretitle {
+  color: var(--fg-neutral-secondary);
+  font-size: var(--type-subtitle-sm);
+}
+
+.teaser.floating-image.pretitle-secondary .teaser-pretitle,
+.teaser.floating-image-left.pretitle-secondary .teaser-pretitle,
+.teaser.floating-image-right.pretitle-secondary .teaser-pretitle {
+  color: var(--fg-neutral-secondary);
+  font-size: var(--type-subtitle-sm);
+  background-color: transparent;
+  text-transform: none;
+  padding: 0;
+  border-radius: 0;
+  font-weight: unset;
+}
+
 /* Title block (heading + description) */
 .teaser .teaser-title {
   display: flex;

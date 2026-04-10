@@ -1520,6 +1520,23 @@ h6 a:focus {
   border-radius: var(--radius-063);
 }
 
+/* color-secondary style variant — applies to any block */
+.color-secondary h1,
+.color-secondary h2,
+.color-secondary h3,
+.color-secondary h4,
+.color-secondary h5,
+.color-secondary h6 {
+  color: var(--fg-neutral-secondary);
+}
+
+/* pretitle-secondary style variant — applies to any block
+   targets p elements before headings */
+.pretitle-secondary p:has(~ h1, ~ h2, ~ h3, ~ h4, ~ h5, ~ h6) {
+  color: var(--fg-neutral-secondary);
+  font-size: var(--type-subtitle-sm);
+}
+
 p,
 dl,
 ol,

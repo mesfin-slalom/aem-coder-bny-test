@@ -18,6 +18,13 @@ header .nav-wrapper {
 
 header .header {
   position: relative;
+  height: var(--nav-height);
+}
+
+@media (width > 1024px) {
+  header .header {
+    height: auto;
+  }
 }
 
 header nav {
