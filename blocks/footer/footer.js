@@ -36,6 +36,18 @@ function decorateFooterMenu(section) {
     }
   });
 
+  // Decorate locale selector link as button (decorateButtons skips it due to icon imgs)
+  const localeLink = nav.querySelector('p > em > a');
+  if (localeLink) {
+    const p = localeLink.closest('p');
+    const em = localeLink.closest('em');
+    if (p && em) {
+      p.className = 'button-wrapper';
+      localeLink.className = 'button secondary';
+      em.replaceWith(localeLink);
+    }
+  }
+
   wrapper.replaceChildren(nav);
 }
 
