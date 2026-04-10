@@ -1540,9 +1540,10 @@ h6 a:focus {
 }
 
 /* pretitle-secondary style variant — applies to any block
-   targets p elements before headings and teaser pretitle elements */
+   targets p elements before headings */
 .pretitle-secondary p:has(~ h1, ~ h2, ~ h3, ~ h4, ~ h5, ~ h6) {
   color: var(--fg-neutral-secondary);
+  font-size: var(--type-subtitle-sm);
 }
 
 p,

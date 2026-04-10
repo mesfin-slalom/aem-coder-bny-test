@@ -65,12 +65,14 @@
 
 .teaser.pretitle-secondary .teaser-pretitle {
   color: var(--fg-neutral-secondary);
+  font-size: var(--type-subtitle-sm);
 }
 
 .teaser.floating-image.pretitle-secondary .teaser-pretitle,
 .teaser.floating-image-left.pretitle-secondary .teaser-pretitle,
 .teaser.floating-image-right.pretitle-secondary .teaser-pretitle {
   color: var(--fg-neutral-secondary);
+  font-size: var(--type-subtitle-sm);
   background-color: transparent;
   text-transform: none;
   padding: 0;
