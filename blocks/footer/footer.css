@@ -2,6 +2,7 @@
 
 footer {
   background-color: var(--bg-neutral-primary);
+  padding: var(--sizing-250-40px) var(--sizing-300-48px);
 }
 
 footer .footer > div {
@@ -19,7 +20,6 @@ footer .footer .footer-menu {
 }
 
 footer .footer .footer-menu > div {
-  padding: var(--sizing-300-48px) var(--page-margin);
   max-width: var(--breakpoint-desktop-wide);
   margin: 0 auto;
 }
