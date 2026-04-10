@@ -207,6 +207,7 @@
   height: auto;
   display: block;
   object-fit: cover;
+  aspect-ratio: 16 / 9
 }
 
 .carousel.floating-image .carousel-slide .carousel-slide-content {
