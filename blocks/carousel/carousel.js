@@ -50,11 +50,16 @@ function updateActiveSlide(slide) {
   });
 }
 
+function getActiveSlideIndex(block) {
+  return parseInt(block.dataset.activeSlide, 10) || 0;
+}
+
 function showSlide(block, slideIndex = 0) {
   const slides = block.querySelectorAll('.carousel-slide');
   const slidesContainer = block.querySelector('.carousel-slides');
   const maxScroll = slidesContainer.scrollWidth - slidesContainer.clientWidth;
   const currentScroll = Math.round(slidesContainer.scrollLeft);
+  const isForward = slideIndex > getActiveSlideIndex(block);
 
   let realSlideIndex = slideIndex;
 
@@ -62,17 +67,27 @@ function showSlide(block, slideIndex = 0) {
   if (slideIndex >= slides.length) realSlideIndex = 0;
   if (slideIndex < 0) realSlideIndex = slides.length - 1;
 
-  // If at scroll end and advancing forward, wrap to start
-  if (currentScroll >= maxScroll - 2 && slideIndex >= slides.length) {
-    realSlideIndex = 0;
+  // When going backward, find a slide that actually changes scroll position
+  if (!isForward && maxScroll > 0 && realSlideIndex >= 0) {
+    while (realSlideIndex > 0
+      && slides[realSlideIndex].offsetLeft >= currentScroll - 2) {
+      realSlideIndex -= 1;
+    }
   }
 
-  // If at scroll start and going backward, wrap to end
-  if (currentScroll <= 2 && slideIndex < 0) {
-    realSlideIndex = slides.length - 1;
+  let targetScroll = slides[realSlideIndex].offsetLeft;
+
+  // Wrap at boundaries
+  if (maxScroll > 0) {
+    if (isForward && currentScroll >= maxScroll - 2) {
+      realSlideIndex = 0;
+      targetScroll = 0;
+    } else if (!isForward && currentScroll <= 2) {
+      realSlideIndex = slides.length - 1;
+      targetScroll = slides[realSlideIndex].offsetLeft;
+    }
   }
 
-  const activeSlide = slides[realSlideIndex];
   block.dataset.activeSlide = realSlideIndex;
 
   slides.forEach((s, idx) => {
@@ -86,11 +101,8 @@ function showSlide(block, slideIndex = 0) {
     });
   });
 
-  const targetScroll = activeSlide.offsetLeft;
-
-  // If all slides are visible (no scrollable overflow) or scroll won't change,
-  // manually update slider bar since no scroll event will fire
-  if (maxScroll <= 0 || Math.abs(targetScroll - currentScroll) < 2) {
+  // If all slides visible, just update slider bar
+  if (maxScroll <= 0) {
     updateSliderBar(block);
   } else {
     slidesContainer.scrollTo({
@@ -99,10 +111,6 @@ function showSlide(block, slideIndex = 0) {
       behavior: 'smooth',
     });
   }
-}
-
-function getActiveSlideIndex(block) {
-  return parseInt(block.dataset.activeSlide, 10) || 0;
 }
 
 function startAutoplay(block) {
