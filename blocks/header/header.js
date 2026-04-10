@@ -306,8 +306,23 @@ export default async function decorate(block) {
     });
   }
 
-  // Build mobile tools (clone of nav-tools items except search) for bottom of mobile nav
+  // Add utility classes to nav-tools paragraphs for CSS targeting
   const navTools = nav.querySelector('.nav-tools');
+  if (navTools) {
+    navTools.querySelectorAll('p').forEach((p) => {
+      const link = p.querySelector('a');
+      if (!link) return;
+      if (link.getAttribute('title') === '') {
+        p.classList.add('nav-tools-search');
+      } else if (link.classList.contains('button')) {
+        p.classList.add('nav-tools-button');
+      } else {
+        p.classList.add('nav-tools-link');
+      }
+    });
+  }
+
+  // Build mobile tools (clone of nav-tools items except search) for bottom of mobile nav
   if (navTools && navSections) {
     const mobileTools = document.createElement('div');
     mobileTools.className = 'nav-mobile-tools';
@@ -315,9 +330,13 @@ export default async function decorate(block) {
     [...toolsContent.querySelectorAll(':scope > p')].forEach((p) => {
       const link = p.querySelector('a');
       if (!link) return;
-      // Skip search icon (empty title)
       if (link.getAttribute('title') === '') return;
       const clone = p.cloneNode(true);
+      if (p.classList.contains('nav-tools-button')) {
+        clone.classList.add('nav-mobile-tools-button');
+      } else {
+        clone.classList.add('nav-mobile-tools-link');
+      }
       mobileTools.append(clone);
     });
     navSections.append(mobileTools);

@@ -687,7 +687,7 @@ header nav .nav-tools {
 
 @media (width <= 1024px) {
   /* Search icon sizing and padding in mobile top bar */
-  header nav .nav-tools p:has(a[title=""]) {
+  header nav .nav-tools .nav-tools-search {
     padding: 0;
   }
 
@@ -697,17 +697,14 @@ header nav .nav-tools {
   }
 
   /* When menu is open on mobile, only show search icon in the tools area (top bar) */
-  header nav[aria-expanded='true'] .nav-tools p:not(:has(a[title=""])) {
+  header nav[aria-expanded='true'] .nav-tools .nav-tools-link,
+  header nav[aria-expanded='true'] .nav-tools .nav-tools-button {
     display: none;
   }
 
-  /* Hide non-search tools items on mobile closed state too (they show via hamburger menu) */
-  header nav[aria-expanded='false'] .nav-tools p:not(:has(a[title=""]), :has(.button)) {
-    display: none;
-  }
-
-  /* Keep Contact Us hidden in top bar when closed */
-  header nav[aria-expanded='false'] .nav-tools p:has(.button) {
+  /* Hide non-search tools items on mobile closed state */
+  header nav[aria-expanded='false'] .nav-tools .nav-tools-link,
+  header nav[aria-expanded='false'] .nav-tools .nav-tools-button {
     display: none;
   }
 }
@@ -725,7 +722,7 @@ header nav .nav-mobile-tools {
     padding-top: var(--sizing-050-8px);
   }
 
-  header nav .nav-mobile-tools p:not(:has(.button)) {
+  header nav .nav-mobile-tools .nav-mobile-tools-link {
     border-bottom: 1px solid var(--color-gray-100);
     padding: var(--sizing-100-16px-base) var(--sizing-050-8px);
     font-size: var(--type-body-md-base, 16px);
@@ -736,25 +733,25 @@ header nav .nav-mobile-tools {
     cursor: pointer;
   }
 
-  header nav .nav-mobile-tools p:not(:has(.button)):hover {
+  header nav .nav-mobile-tools .nav-mobile-tools-link:hover {
     background-color: var(--color-teal-050);
   }
 
-  header nav .nav-mobile-tools p:not(:has(.button)):active {
+  header nav .nav-mobile-tools .nav-mobile-tools-link:active {
     background-color: var(--color-teal-100);
   }
 
-  header nav .nav-mobile-tools p:not(:has(.button)):focus-within {
+  header nav .nav-mobile-tools .nav-mobile-tools-link:focus-within {
     outline: var(--sizing-013-2px) solid var(--stroke-focus-brand);
     outline-offset: -2px;
     border-radius: var(--radius-063, 10px);
   }
 
-  header nav .nav-mobile-tools p:not(:has(.button)) a {
+  header nav .nav-mobile-tools .nav-mobile-tools-link a {
     font-size: var(--type-body-md-base, 16px);
   }
 
-  header nav .nav-mobile-tools p:has(.button) {
+  header nav .nav-mobile-tools .nav-mobile-tools-button {
     margin-top: var(--sizing-150-24px);
     margin-bottom: var(--sizing-150-24px);
   }
@@ -782,22 +779,26 @@ header nav .nav-tools p {
 }
 
 /* nav-tools text link wrapper (p) — states on the p, not the a */
-header nav .nav-tools p:not(:has(.button)) {
+header nav .nav-tools .nav-tools-search,
+header nav .nav-tools .nav-tools-link {
   padding: var(--sizing-025-4px) var(--sizing-050-8px);
   border-radius: var(--radius-050);
   transition: background-color 200ms ease;
   cursor: pointer;
 }
 
-header nav .nav-tools p:not(:has(.button)):hover {
+header nav .nav-tools .nav-tools-search:hover,
+header nav .nav-tools .nav-tools-link:hover {
   background-color: var(--color-teal-050);
 }
 
-header nav .nav-tools p:not(:has(.button)):active {
+header nav .nav-tools .nav-tools-search:active,
+header nav .nav-tools .nav-tools-link:active {
   background-color: var(--color-teal-100);
 }
 
-header nav .nav-tools p:not(:has(.button)):focus-within {
+header nav .nav-tools .nav-tools-search:focus-within,
+header nav .nav-tools .nav-tools-link:focus-within {
   outline: var(--sizing-013-2px) solid var(--stroke-focus-brand);
   outline-offset: -2px;
   border-radius: var(--radius-063);
