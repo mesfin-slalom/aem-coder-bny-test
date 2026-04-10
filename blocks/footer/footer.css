@@ -15,10 +15,6 @@ footer .footer p {
 }
 
 /* Footer Menu Section */
-footer .footer .footer-menu {
-  border-top: 1px solid var(--stroke-neutral-tertiary);
-}
-
 footer .footer .footer-menu > div {
   max-width: var(--breakpoint-desktop-wide);
   margin: 0 auto;
