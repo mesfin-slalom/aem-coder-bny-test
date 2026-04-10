@@ -2,6 +2,7 @@
 
 footer {
   background-color: var(--bg-neutral-primary);
+  padding: var(--sizing-250-40px) var(--sizing-300-48px);
 }
 
 footer .footer > div {
@@ -14,12 +15,7 @@ footer .footer p {
 }
 
 /* Footer Menu Section */
-footer .footer .footer-menu {
-  border-top: 1px solid var(--stroke-neutral-tertiary);
-}
-
 footer .footer .footer-menu > div {
-  padding: var(--sizing-300-48px) var(--page-margin);
   max-width: var(--breakpoint-desktop-wide);
   margin: 0 auto;
 }
@@ -144,13 +140,12 @@ footer .footer .footer-nav .button-wrapper .button:focus {
 }
 
 /* Footer Social & Legal Section */
-footer .footer .footer-social-legal > div {
-  padding: var(--sizing-300-48px) var(--page-margin);
-  max-width: var(--breakpoint-desktop-wide);
-  margin: 0 auto;
+footer .footer .footer-social-legal {
   display: flex;
   flex-direction: column;
   gap: var(--sizing-050-8px);
+  max-width: var(--breakpoint-desktop-wide);
+  margin: 0 auto;
 }
 
 footer .footer .footer-social-icons {
@@ -210,6 +205,7 @@ footer .footer .footer-social-icons .icon {
 footer .footer .footer-social-icons .icon img {
   width: 100%;
   height: 100%;
+  filter: brightness(0) saturate(100%) invert(11%) sepia(50%) saturate(2878%) hue-rotate(185deg) brightness(93%) contrast(98%);
 }
 
 footer .footer .footer-social-legal hr {
