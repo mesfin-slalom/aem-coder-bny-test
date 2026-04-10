@@ -933,7 +933,6 @@ button.button {
   gap: var(--sizing-050-8px);
   justify-content: center;
   min-width: var(--sizing-300-48px);
-  max-width: var(--components-button-max-width);
   overflow: hidden;
   padding: var(--sizing-050-8px) var(--sizing-100-16px-base);
   text-decoration: none;
@@ -1518,6 +1517,16 @@ h6 a:focus {
   color: var(--fg-brand-main);
   outline: var(--sizing-013-2px) solid var(--stroke-focus-brand);
   border-radius: var(--radius-063);
+}
+
+/* color-secondary style variant — applies to any block */
+.color-secondary h1,
+.color-secondary h2,
+.color-secondary h3,
+.color-secondary h4,
+.color-secondary h5,
+.color-secondary h6 {
+  color: var(--fg-neutral-secondary);
 }
 
 p,
