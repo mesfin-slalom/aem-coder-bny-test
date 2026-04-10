@@ -140,7 +140,9 @@ function buildMegaMenu(navDrop) {
       const group = document.createElement('div');
       group.className = 'mega-menu-group';
 
-      const strong = li.querySelector(':scope > strong');
+      // Handle both local (li > strong) and CMS (li > p > strong)
+      const strong = li.querySelector(':scope > strong')
+        || li.querySelector(':scope > p > strong');
       if (strong) {
         const heading = document.createElement('div');
         heading.className = 'mega-menu-heading';
@@ -272,21 +274,23 @@ export default async function decorate(block) {
         buildMegaMenu(navSection);
       }
       // Wrap the nav label in a header div for mobile accordion layout
-      const { firstChild } = navSection;
+      // Find first meaningful child (skip whitespace text nodes)
       let labelText = '';
       let labelNode = null;
-
-      if (firstChild && firstChild.nodeType === Node.TEXT_NODE
-        && firstChild.textContent.trim()) {
-        // Local/static: bare text node
-        labelText = firstChild.textContent.trim();
-        labelNode = firstChild;
-      } else if (firstChild && firstChild.tagName === 'P'
-        && !firstChild.querySelector('ul')) {
-        // CMS pipeline: text wrapped in <p>
-        labelText = firstChild.textContent.trim();
-        labelNode = firstChild;
-      }
+      [...navSection.childNodes].some((child) => {
+        if (child.nodeType === Node.TEXT_NODE
+          && child.textContent.trim()) {
+          labelText = child.textContent.trim();
+          labelNode = child;
+          return true;
+        }
+        if (child.tagName === 'P' && !child.querySelector('ul')) {
+          labelText = child.textContent.trim();
+          labelNode = child;
+          return true;
+        }
+        return false;
+      });
 
       if (labelText && labelNode) {
         const header = document.createElement('div');
