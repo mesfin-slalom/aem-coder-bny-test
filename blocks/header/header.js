@@ -140,7 +140,9 @@ function buildMegaMenu(navDrop) {
       const group = document.createElement('div');
       group.className = 'mega-menu-group';
 
-      const strong = li.querySelector(':scope > strong');
+      // Handle both local (li > strong) and CMS (li > p > strong)
+      const strong = li.querySelector(':scope > strong')
+        || li.querySelector(':scope > p > strong');
       if (strong) {
         const heading = document.createElement('div');
         heading.className = 'mega-menu-heading';
@@ -271,22 +273,40 @@ export default async function decorate(block) {
         navSection.classList.add('nav-drop');
         buildMegaMenu(navSection);
       }
-      // Wrap the bare text node in a header div for mobile accordion layout + states
-      const { firstChild } = navSection;
-      if (firstChild && firstChild.nodeType === Node.TEXT_NODE && firstChild.textContent.trim()) {
+      // Wrap the nav label in a header div for mobile accordion layout
+      // Find first meaningful child (skip whitespace text nodes)
+      let labelText = '';
+      let labelNode = null;
+      [...navSection.childNodes].some((child) => {
+        if (child.nodeType === Node.TEXT_NODE
+          && child.textContent.trim()) {
+          labelText = child.textContent.trim();
+          labelNode = child;
+          return true;
+        }
+        if (child.tagName === 'P' && !child.querySelector('ul')) {
+          labelText = child.textContent.trim();
+          labelNode = child;
+          return true;
+        }
+        return false;
+      });
+
+      if (labelText && labelNode) {
         const header = document.createElement('div');
         header.className = 'nav-drop-header';
         header.setAttribute('role', 'button');
         header.setAttribute('tabindex', '0');
         const label = document.createElement('span');
         label.className = 'nav-drop-label';
-        label.textContent = firstChild.textContent.trim();
+        label.textContent = labelText;
         header.append(label);
         const chevron = document.createElement('span');
         chevron.className = 'nav-drop-chevron';
-        chevron.innerHTML = '<img src="/icons/chevron-down.svg" alt="" width="20" height="20">';
+        chevron.innerHTML = '<img src="/icons/chevron-down.svg"'
+          + ' alt="" width="20" height="20">';
         header.append(chevron);
-        navSection.replaceChild(header, firstChild);
+        navSection.replaceChild(header, labelNode);
       }
       navSection.addEventListener('click', (e) => {
         if (isDesktop.matches) {
@@ -306,8 +326,23 @@ export default async function decorate(block) {
     });
   }
 
-  // Build mobile tools (clone of nav-tools items except search) for bottom of mobile nav
+  // Add utility classes to nav-tools paragraphs for CSS targeting
   const navTools = nav.querySelector('.nav-tools');
+  if (navTools) {
+    navTools.querySelectorAll('p').forEach((p) => {
+      const link = p.querySelector('a');
+      if (!link) return;
+      if (link.getAttribute('title') === '') {
+        p.classList.add('nav-tools-search');
+      } else if (link.classList.contains('button')) {
+        p.classList.add('nav-tools-button');
+      } else {
+        p.classList.add('nav-tools-link');
+      }
+    });
+  }
+
+  // Build mobile tools (clone of nav-tools items except search) for bottom of mobile nav
   if (navTools && navSections) {
     const mobileTools = document.createElement('div');
     mobileTools.className = 'nav-mobile-tools';
@@ -315,9 +350,13 @@ export default async function decorate(block) {
     [...toolsContent.querySelectorAll(':scope > p')].forEach((p) => {
       const link = p.querySelector('a');
       if (!link) return;
-      // Skip search icon (empty title)
       if (link.getAttribute('title') === '') return;
       const clone = p.cloneNode(true);
+      if (p.classList.contains('nav-tools-button')) {
+        clone.classList.add('nav-mobile-tools-button');
+      } else {
+        clone.classList.add('nav-mobile-tools-link');
+      }
       mobileTools.append(clone);
     });
     navSections.append(mobileTools);
