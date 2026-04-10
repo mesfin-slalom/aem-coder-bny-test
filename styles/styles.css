@@ -415,6 +415,9 @@
 
 /* === DARK THEME MODES === */
 .dark-navy {
+  background-color: var(--color-navy-500);
+  color: var(--color-white);
+
   --fg-neutral-primary: var(--color-white);
   --fg-neutral-secondary: var(--color-gray-050);
   --fg-neutral-tertiary: var(--color-gray-100);
@@ -467,6 +470,9 @@
 }
 
 .dark-teal {
+  background-color: var(--color-teal-800);
+  color: var(--color-white);
+
   --fg-neutral-primary: var(--color-white);
   --fg-neutral-secondary: var(--color-gray-050);
   --fg-neutral-tertiary: var(--color-gray-100);
@@ -933,7 +939,6 @@ button.button {
   gap: var(--sizing-050-8px);
   justify-content: center;
   min-width: var(--sizing-300-48px);
-  max-width: var(--components-button-max-width);
   overflow: hidden;
   padding: var(--sizing-050-8px) var(--sizing-100-16px-base);
   text-decoration: none;
@@ -1418,6 +1423,10 @@ main>.section.no-padding {
 
 main>.section.no-padding>div {
   padding: 0;
+}
+
+main>.section.no-top-padding {
+  padding-top: 0;
 }
 
 main>.section:first-of-type {
