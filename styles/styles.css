@@ -1425,6 +1425,10 @@ main>.section.no-padding>div {
   padding: 0;
 }
 
+main>.section.no-top-padding {
+  padding-top: 0;
+}
+
 main>.section:first-of-type {
   margin-top: 0;
 }
