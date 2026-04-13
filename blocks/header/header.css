@@ -59,7 +59,7 @@ header nav[aria-expanded='true'] {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 0 var(--sizing-150-24px);
+    gap: 0 var(--sizing-100-16px-base);
     max-width: var(--breakpoint-desktop-wide);
     padding: var(--sizing-125-20px) var(--sizing-300-48px);
     height: auto;
@@ -561,7 +561,7 @@ header nav .nav-sections ul > li > ul > li {
 
   header nav .nav-sections ul {
     display: flex;
-    gap: var(--sizing-200-32px);
+    gap: var(--sizing-100-16px-base);
     margin: 0;
   }
 
@@ -784,7 +784,7 @@ header nav .nav-tools > div,
 header nav .nav-tools > div > div {
   display: flex;
   align-items: center;
-  gap: var(--sizing-200-32px);
+  gap: var(--sizing-100-16px-base);
 }
 
 header nav .nav-tools p {

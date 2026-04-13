@@ -6,6 +6,9 @@ footer {
 }
 
 footer .footer > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sizing-200-32px);
   margin: auto;
   max-width: var(--breakpoint-desktop-wide);
 }
@@ -23,7 +26,7 @@ footer .footer .footer-menu > div {
 footer .footer .footer-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--sizing-300-48px);
+  gap: 0 var(--sizing-300-48px);
   align-items: flex-start;
 }
 
@@ -228,6 +231,6 @@ footer .footer .footer-legal {
 @media (width < 700px) {
   footer .footer .footer-nav {
     flex-direction: column;
-    gap: var(--sizing-200-32px);
+    gap: var(--sizing-100-16px-base);
   }
 }
