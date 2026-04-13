@@ -21,7 +21,7 @@ header .header {
   height: var(--nav-height);
 }
 
-@media (width > 1024px) {
+@media (width > 1200px) {
   header .header {
     height: auto;
   }
@@ -50,7 +50,7 @@ header nav[aria-expanded='true'] {
   min-height: 100dvh;
 }
 
-@media (width > 1024px) {
+@media (width > 1200px) {
   header .nav-wrapper {
     position: relative;
   }
@@ -59,7 +59,7 @@ header nav[aria-expanded='true'] {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 0 var(--sizing-150-24px);
+    gap: 0 var(--sizing-100-16px-base);
     max-width: var(--breakpoint-desktop-wide);
     padding: var(--sizing-125-20px) var(--sizing-300-48px);
     height: auto;
@@ -223,7 +223,7 @@ header nav[aria-expanded='true'] .nav-hamburger-open {
   display: none;
 }
 
-@media (width > 1024px) {
+@media (width > 1200px) {
   header nav .nav-hamburger {
     display: none;
     visibility: hidden;
@@ -257,8 +257,8 @@ header nav[aria-expanded='true'] .nav-sections {
   align-self: start;
 }
 
-/* --- Mobile nav accordion styles (≤ 1024px) --- */
-@media (width <= 1024px) {
+/* --- Mobile nav accordion styles (≤ 1200px) --- */
+@media (width <= 1200px) {
   /* Top-level nav items as accordion triggers */
   header nav .nav-sections .default-content-wrapper > ul > li.nav-drop,
   header nav .nav-sections > div > div > ul > li.nav-drop {
@@ -477,7 +477,7 @@ header nav .nav-sections ul > li {
   line-height: 1.5;
 }
 
-@media (width > 1024px) {
+@media (width > 1200px) {
   header nav .nav-sections ul > li {
     padding: var(--sizing-025-4px) var(--sizing-050-8px);
     border-radius: var(--radius-050);
@@ -485,7 +485,7 @@ header nav .nav-sections ul > li {
   }
 }
 
-@media (width > 1024px) {
+@media (width > 1200px) {
   header nav .nav-sections > div > div > ul > li:hover,
   header nav .nav-sections .default-content-wrapper > ul > li:hover {
     background-color: var(--color-teal-050);
@@ -512,7 +512,7 @@ header nav .nav-sections ul > li > ul > li {
   font-weight: 400;
 }
 
-@media (width > 1024px) {
+@media (width > 1200px) {
   /* On desktop, nav-drop-header is just an inline wrapper — no special styling */
   header nav .nav-sections .nav-drop-header {
     display: contents;
@@ -561,7 +561,7 @@ header nav .nav-sections ul > li > ul > li {
 
   header nav .nav-sections ul {
     display: flex;
-    gap: var(--sizing-200-32px);
+    gap: var(--sizing-100-16px-base);
     margin: 0;
   }
 
@@ -698,7 +698,7 @@ header nav .nav-tools {
   gap: var(--sizing-200-32px);
 }
 
-@media (width <= 1024px) {
+@media (width <= 1200px) {
   /* Search icon sizing and padding in mobile top bar */
   header nav .nav-tools .nav-tools-search {
     padding: 0;
@@ -727,7 +727,7 @@ header nav .nav-mobile-tools {
   display: none;
 }
 
-@media (width <= 1024px) {
+@media (width <= 1200px) {
   header nav[aria-expanded='true'] .nav-mobile-tools {
     display: flex;
     flex-direction: column;
@@ -784,7 +784,7 @@ header nav .nav-tools > div,
 header nav .nav-tools > div > div {
   display: flex;
   align-items: center;
-  gap: var(--sizing-200-32px);
+  gap: var(--sizing-100-16px-base);
 }
 
 header nav .nav-tools p {
