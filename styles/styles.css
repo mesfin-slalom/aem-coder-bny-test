@@ -918,7 +918,7 @@ a:focus {
 
 /* buttons */
 p:has(> a.button) {
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
   gap: var(--sizing-150-24px);
   cursor: pointer;
