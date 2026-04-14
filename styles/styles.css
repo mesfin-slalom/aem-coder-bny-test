@@ -185,8 +185,8 @@
   --bg-neutral-secondary: var(--color-gray-025);
   --bg-neutral-tertiary: var(--color-gray-050);
   --bg-transparent: rgb(255 255 255 / 0%);
-  --bg-neutral-hover: rgb(43 156 174 / 8%);
-  --bg-neutral-active: rgb(43 156 174 / 16%);
+  --bg-neutral-hover: var(--color-teal-050);
+  --bg-neutral-active: var(--color-teal-100);
   --bg-neutral-disabled: var(--color-gray-200);
   --bg-neutral-gradient-0: rgb(255 255 255 / 0%);
   --bg-neutral-gradient-100: var(--color-white);
