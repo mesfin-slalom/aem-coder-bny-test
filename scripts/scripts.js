@@ -2,6 +2,7 @@ import {
   buildBlock,
   loadHeader,
   loadFooter,
+  loadArticleFooter,
   decorateIcons,
   decorateSections,
   decorateBlocks,
@@ -10,6 +11,7 @@ import {
   loadSection,
   loadSections,
   loadCSS,
+  decorateArticleTemplate,
 } from './aem.js';
 
 /**
@@ -124,6 +126,7 @@ export function decorateMain(main) {
   decorateSections(main);
   decorateBlocks(main);
   decorateButtons(main);
+  decorateArticleTemplate();
 }
 
 /**
@@ -158,6 +161,7 @@ async function loadLazy(doc) {
   loadHeader(doc.querySelector('header'));
 
   const main = doc.querySelector('main');
+  const articleBody = doc.querySelector('.article-template main > .section > .default-content-wrapper');
   await loadSections(main);
 
   const { hash } = window.location;
@@ -165,6 +169,9 @@ async function loadLazy(doc) {
   if (hash && element) element.scrollIntoView();
 
   loadFooter(doc.querySelector('footer'));
+  if (articleBody) {
+    loadArticleFooter(articleBody);
+  }
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
