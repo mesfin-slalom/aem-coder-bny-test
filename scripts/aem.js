@@ -587,12 +587,12 @@ function decorateBlocks(main) {
 }
 
 function decorateArticleTemplate() {
-  console.log('enter func')
+  console.log('enter func');
   if (document.body.classList.contains('article-template')) {
-    console.log('body has template')
+    console.log('body has template');
     const h1 = document.querySelector('h1');
     if (h1 && !h1.closest('.heading-wrapper')) {
-      console.log('h1 confirmed')
+      console.log('h1 confirmed');
       const headingWrapper = document.createElement('div');
       const breadcrumb = document.createElement('div');
       breadcrumb.classList.add('breadcrumb');
