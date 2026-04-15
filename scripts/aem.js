@@ -758,7 +758,7 @@ export {
   loadCSS,
   loadFooter,
   loadHeader,
-  loadArticleFooter
+  loadArticleFooter,
   loadScript,
   loadSection,
   loadSections,
