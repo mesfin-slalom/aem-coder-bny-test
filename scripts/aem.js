@@ -758,6 +758,7 @@ export {
   loadCSS,
   loadFooter,
   loadHeader,
+  loadArticleFooter
   loadScript,
   loadSection,
   loadSections,
@@ -768,4 +769,5 @@ export {
   toClassName,
   waitForFirstImage,
   wrapTextNodes,
+  decorateArticleTemplate,
 };
