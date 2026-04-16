@@ -586,86 +586,6 @@ function decorateBlocks(main) {
   main.querySelectorAll('div.section > div > div').forEach(decorateBlock);
 }
 
-function decorateArticleTemplate() {
-  if (document.body.classList.contains('article-template')) {
-    const h1 = document.querySelector('h1');
-    if (h1 && !h1.closest('.heading-wrapper')) {
-      const headingWrapper = document.createElement('div');
-      const breadcrumb = document.createElement('div');
-      breadcrumb.classList.add('breadcrumb');
-      const list = document.createElement('ul');
-
-      const newsroomItem = document.createElement('li');
-      const newsroomLink = document.createElement('a');
-      newsroomLink.href = '/';
-      newsroomLink.textContent = 'Newsroom';
-      newsroomItem.appendChild(newsroomLink);
-      list.appendChild(newsroomItem);
-
-      const categoryItem = document.createElement('li');
-      const category = getMetadata('category');
-      categoryItem.textContent = category;
-      list.appendChild(categoryItem);
-
-      breadcrumb.appendChild(list);
-      headingWrapper.appendChild(breadcrumb);
-      headingWrapper.classList.add('heading-wrapper', 'dark-teal');
-      h1.parentElement.insertBefore(headingWrapper, h1);
-      headingWrapper.appendChild(h1);
-
-      const articleInfo = document.createElement('div');
-      articleInfo.classList.add('article-info');
-
-      const tagsDiv = document.createElement('div');
-      tagsDiv.classList.add('tags');
-      const tags = getMetadata('article:tag');
-      tagsDiv.textContent = tags;
-      articleInfo.appendChild(tagsDiv);
-
-      const pubDateDiv = document.createElement('div');
-      pubDateDiv.classList.add('publication-date');
-      const pubDate = getMetadata('publication-date');
-      pubDateDiv.textContent = pubDate;
-      articleInfo.appendChild(pubDateDiv);
-
-      const shareLinksDiv = document.createElement('div');
-      shareLinksDiv.classList.add('share-links');
-      const shareLinks = [
-        { name: 'linkedin', href: '#' },
-        { name: 'facebook', href: '#' },
-        { name: 'x', href: '#' },
-        { name: 'mail', href: 'mailto:' },
-      ];
-      shareLinks.forEach((link) => {
-        const a = document.createElement('a');
-        const iconSpan = document.createElement('span');
-        iconSpan.classList.add('icon', `icon-${link.name}`);
-        a.appendChild(iconSpan);
-        a.classList.add('button');
-        a.setAttribute('title', '');
-        a.href = link.href;
-        decorateIcon(iconSpan);
-        shareLinksDiv.appendChild(a);
-      });
-      articleInfo.appendChild(shareLinksDiv);
-
-      headingWrapper.after(articleInfo);
-    }
-  }
-}
-
-/**
- * Loads a block named 'article-footer' into footer
- * @param footer footer element
- * @returns {Promise}
- */
-async function loadArticleFooter(footer) {
-  const articleFooterBlock = buildBlock('article-footer', '');
-  footer.append(articleFooterBlock);
-  decorateBlock(articleFooterBlock);
-  return loadBlock(articleFooterBlock);
-}
-
 /**
  * Loads a block named 'header' into header
  * @param {Element} header header element
@@ -758,7 +678,6 @@ export {
   loadCSS,
   loadFooter,
   loadHeader,
-  loadArticleFooter,
   loadScript,
   loadSection,
   loadSections,
@@ -769,5 +688,4 @@ export {
   toClassName,
   waitForFirstImage,
   wrapTextNodes,
-  decorateArticleTemplate,
 };

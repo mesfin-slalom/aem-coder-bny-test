@@ -1708,6 +1708,7 @@ table th {
   font-weight: 400;
   line-height: 1.5;
   color: var(--color-white);
+  text-decoration: none;
 }
 
 .article-template main .breadcrumb ul li a {
