@@ -1,5 +1,8 @@
 import {
   buildBlock,
+  decorateBlock,
+  getMetadata,
+  loadBlock,
   loadHeader,
   loadFooter,
   decorateIcons,
@@ -114,6 +117,107 @@ function decorateButtons(main) {
 }
 
 /**
+ * Decorates article-template pages with breadcrumb, heading wrapper,
+ * and article-info section.
+ * @param {Element} main The main element
+ */
+async function decorateArticleTemplate(main) {
+  if (!document.body.classList.contains('article-template')) return;
+
+  const h1 = main.querySelector('h1');
+  if (!h1 || h1.closest('.heading-wrapper')) return;
+
+  const section = h1.closest('.section');
+  if (!section) return;
+
+  const wrapper = section.querySelector('.default-content-wrapper');
+  if (!wrapper) return;
+
+  // Build breadcrumb from metadata
+  const category = getMetadata('category');
+  const breadcrumb = document.createElement('div');
+  breadcrumb.classList.add('breadcrumb');
+  const list = document.createElement('ul');
+
+  const newsroomItem = document.createElement('li');
+  const newsroomLink = document.createElement('a');
+  newsroomLink.href = '/';
+  newsroomLink.textContent = 'Newsroom';
+  newsroomItem.append(newsroomLink);
+  list.append(newsroomItem);
+
+  if (category) {
+    const categoryItem = document.createElement('li');
+    categoryItem.textContent = category;
+    list.append(categoryItem);
+  }
+
+  breadcrumb.append(list);
+
+  // Remove authored breadcrumb list if present
+  const authoredList = wrapper.querySelector(':scope > ul');
+  if (authoredList) authoredList.remove();
+
+  // Build heading wrapper
+  const headingWrapper = document.createElement('div');
+  headingWrapper.classList.add('heading-wrapper', 'dark-teal');
+  headingWrapper.append(breadcrumb);
+  h1.before(headingWrapper);
+  headingWrapper.append(h1);
+
+  // Build article-info from metadata
+  const articleInfo = document.createElement('div');
+  articleInfo.classList.add('article-info');
+
+  const tags = getMetadata('article-tag');
+  if (tags) {
+    const tagsDiv = document.createElement('div');
+    tagsDiv.classList.add('tags');
+    tagsDiv.textContent = tags;
+    articleInfo.append(tagsDiv);
+  }
+
+  const pubDate = getMetadata('publication-date');
+  if (pubDate) {
+    const pubDateDiv = document.createElement('div');
+    pubDateDiv.classList.add('publication-date');
+    pubDateDiv.textContent = pubDate;
+    articleInfo.append(pubDateDiv);
+  }
+
+  const shareLinksDiv = document.createElement('div');
+  shareLinksDiv.classList.add('share-links');
+  const shareLinks = [
+    { name: 'linkedin', href: '#' },
+    { name: 'facebook', href: '#' },
+    { name: 'x', href: '#' },
+    { name: 'mail', href: 'mailto:' },
+  ];
+  shareLinks.forEach((link) => {
+    const a = document.createElement('a');
+    a.classList.add('button');
+    a.setAttribute('title', '');
+    a.href = link.href;
+    const iconSpan = document.createElement('span');
+    iconSpan.classList.add('icon', `icon-${link.name}`);
+    a.append(iconSpan);
+    shareLinksDiv.append(a);
+  });
+  articleInfo.append(shareLinksDiv);
+  decorateIcons(articleInfo);
+
+  headingWrapper.after(articleInfo);
+
+  // Load article-footer block at the end of main
+  const articleFooterSection = document.createElement('div');
+  const articleFooterBlock = buildBlock('article-footer', '');
+  articleFooterSection.append(articleFooterBlock);
+  main.append(articleFooterSection);
+  decorateBlock(articleFooterBlock);
+  await loadBlock(articleFooterBlock);
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -159,6 +263,8 @@ async function loadLazy(doc) {
 
   const main = doc.querySelector('main');
   await loadSections(main);
+
+  await decorateArticleTemplate(main);
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;

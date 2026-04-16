@@ -1701,12 +1701,25 @@ table th {
 .article-template main .breadcrumb ul li {
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: var(--sizing-075-12px);
+  font-family: var(--type-default), roboto-fallback, sans-serif;
+  font-size: var(--type-body-sm-base);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+.article-template main .breadcrumb ul li a {
+  color: var(--color-white);
+  text-decoration: none;
 }
 
 .article-template main .breadcrumb ul li:first-child::after {
   content: '';
   background: url('../icons/chevron-right.svg') no-repeat center;
+  background-size: contain;
   width: var(--sizing-150-24px);
   height: var(--sizing-150-24px);
   display: inline-block;
@@ -1728,5 +1741,9 @@ table th {
   .article-template .article-info .share-links {
     margin: var(--sizing-100-16px-base) calc(var(--sizing-050-8px) * -1) var(--sizing-150-24px);
   }
+}
+
+.article-template footer {
+  background-color: var(--bg-neutral-tertiary);
 }
 
