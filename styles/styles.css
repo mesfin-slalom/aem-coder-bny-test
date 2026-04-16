@@ -1649,3 +1649,100 @@ table th {
   font-size: var(--type-body-sm-base);
 }
 
+/* Article Template */
+.article-template main > .section {
+  padding-top: 0;
+}
+
+.article-template main > .section > div {
+  max-width: 1024px;
+}
+
+.article-template main .heading-wrapper {
+  padding: var(--sizing-600-96px) 0;
+  margin-bottom: var(--sizing-300-48px);
+  position: relative;
+}
+
+.article-template main .heading-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 100%;
+  background: var(--bg-neutral-secondary);
+}
+
+.article-template main .heading-wrapper h1 {
+  color: var(--fg-neutral-primary);
+  font-size: var(--type-heading-3);
+  line-height: 100%;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.article-template main .breadcrumb {
+  position: relative;
+  z-index: 1;
+}
+
+.article-template main .breadcrumb ul {
+  list-style: none;
+  margin: 0 0 var(--sizing-050-8px);
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  gap: var(--sizing-075-12px);
+}
+
+.article-template main .breadcrumb ul li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--sizing-075-12px);
+  font-family: var(--type-default), roboto-fallback, sans-serif;
+  font-size: var(--type-body-sm-base);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-white);
+}
+
+.article-template main .breadcrumb ul li a {
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+.article-template main .breadcrumb ul li:first-child::after {
+  content: '';
+  background: url('../icons/chevron-right.svg') no-repeat center;
+  background-size: contain;
+  width: var(--sizing-150-24px);
+  height: var(--sizing-150-24px);
+  display: inline-block;
+  filter: brightness(0) saturate(100%) invert(93%) sepia(100%) saturate(0%) hue-rotate(34deg) brightness(109%) contrast(100%);
+}
+
+.article-template .article-info .tags {
+  font-weight: 700;
+}
+
+.article-template .article-info .share-links {
+  display: flex;
+  flex-direction: row;
+  gap: var(--sizing-075-12px);
+  margin: var(--sizing-100-16px-base) calc(var(--sizing-025-4px) * -1) var(--sizing-300-48px);
+}
+
+@media (width <= 1024px) {
+  .article-template .article-info .share-links {
+    margin: var(--sizing-100-16px-base) calc(var(--sizing-050-8px) * -1) var(--sizing-150-24px);
+  }
+}
+
+.article-template footer {
+  background-color: var(--bg-neutral-tertiary);
+}
+

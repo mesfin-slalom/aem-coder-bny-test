@@ -1,0 +1,63 @@
+.article-footer-wrapper {
+  max-width: unset;
+}
+
+.article-footer-wrapper > .article-footer.block {
+  background-color: var(--color-gray-050);
+}
+
+.article-footer .section {
+  padding: var(--sizing-300-48px) var(--page-margin);
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.article-footer .section > .default-content-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sizing-150-24px);
+}
+
+.article-footer .section > .default-content-wrapper > p:first-child {
+  font-family: var(--type-default), roboto-fallback, sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--fg-neutral-primary);
+  margin: 0;
+}
+
+.article-footer .section > .default-content-wrapper > .button-container {
+  display: inline-flex;
+  margin: 0;
+}
+
+.article-footer .section > .default-content-wrapper > .button-container:first-of-type {
+  margin-right: var(--sizing-300-48px);
+}
+
+/* Links inherit global tertiary button styling */
+.article-footer .section a.button.tertiary {
+  font-size: var(--type-button-lg);
+  color: var(--fg-neutral-primary);
+  background-color: var(--bg-neutral-tertiary);
+}
+
+@media (width < 700px) {
+  .article-footer .section {
+    padding: var(--sizing-150-24px);
+  }
+
+  .article-footer .section > .default-content-wrapper > p:first-child {
+    font-size: 20px;
+  }
+
+  .article-footer .section > .default-content-wrapper > .button-container {
+    display: flex;
+  }
+
+  .article-footer .section > .default-content-wrapper > .button-container:first-of-type {
+    margin-right: 0;
+    margin-bottom: var(--sizing-150-24px);
+  }
+}
