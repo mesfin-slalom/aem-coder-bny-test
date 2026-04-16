@@ -158,7 +158,6 @@ async function loadLazy(doc) {
   loadHeader(doc.querySelector('header'));
 
   const main = doc.querySelector('main');
-  const articleBody = doc.querySelector('.article-template main > .section > .default-content-wrapper');
   await loadSections(main);
 
   const { hash } = window.location;
