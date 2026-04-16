@@ -2,7 +2,7 @@
   max-width: unset;
 }
 
-.article-footer-wrapper > .article-footer.block {
+.article-footer .section.article-footer {
   background-color: var(--color-gray-050);
 }
 
